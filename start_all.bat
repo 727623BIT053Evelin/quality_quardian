@@ -1,0 +1,13 @@
+@echo off
+echo Starting Quality Guardian...
+
+echo Starting ML Service...
+start cmd /k "cd ml && python app.py"
+
+echo Starting Node Server...
+start cmd /k "cd server && node index.js"
+
+echo Starting Frontend...
+start cmd /k "cd client && npm run dev"
+
+echo All services started!

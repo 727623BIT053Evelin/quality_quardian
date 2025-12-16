@@ -1,0 +1,15 @@
+CompanyID,CompanyName,Industry,Revenue,Employees,Country,ContactEmail,anomaly_score
+1.0,DataSphere,IT Services,1350000,60,USA,support@datasphere.com,-1
+2.0,FinEdge,Finance,"2,100,000",85,uk,contact@finedge.co.uk,1
+3.0,MediCore,Healthcare,1750000,60,Germany,info@medicore.de,1
+4.0,CloudNest,Cloud Computing,980k,40,Canada,hello@cloudnest.ca,1
+5.0,BuildRight,Construction,1250000,90,United States,sales@buildright,1
+6.0,AgroPlus,Agriculture,1350000,30,India,connect@agroplus.in,1
+7.0,RetailMax,Retail,1600000,110,Australia,info@retailmax.au,1
+8.0,SecureNet,Cybersecurity,1450000,55,USA,security@securenet.com,1
+9.0,EduSpark,Education Tech,720000,28,Singapore,admin@eduspark.sg,1
+10.0,AutoWave,Automotive,1950000,95,Japan,contact@autowave.jp,1
+11.0,FinEdge,Finance,2100000,85,UK,contact@finedge.co.uk,1
+12.0,CloudNest,Cloud computing,980000,forty,CA,hello@cloudnest.ca,1
+13.0,DataSphere,IT Services,1350000,60,USA,support@datasphere.com,1
+14.0,BuildRight,Construction,-1250000,90,USA,sales@buildright.com,1

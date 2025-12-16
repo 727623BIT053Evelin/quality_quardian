@@ -1,0 +1,15 @@
+CompanyID,CompanyName,Industry,Revenue,Employees,Country,ContactEmail
+1,DataSphere,IT Services,1350000,60,USA,support@datasphere.com
+2,FinEdge,Finance,"2,100,000",85,uk,contact@finedge.co.uk
+3,MediCore,Healthcare,1750000,,Germany,info@medicore.de
+4,CloudNest,Cloud Computing,980k,40,Canada,hello@cloudnest.ca
+5,BuildRight,Construction,1250000,90,United States,sales@buildright
+6,AgroPlus,Agriculture,,30,India,connect@agroplus.in
+7,RetailMax,Retail,1600000,110,Australia,info@retailmax.au
+8,SecureNet,Cybersecurity,1450000,55,USA,security@securenet.com
+9,EduSpark,Education Tech,720000,28,Singapore,admin@eduspark.sg
+10,AutoWave,Automotive,1950000,95,Japan,contact@autowave.jp
+11,FinEdge,Finance,2100000,85,UK,contact@finedge.co.uk
+12,CloudNest,Cloud computing,980000,forty,CA,hello@cloudnest.ca
+13,DataSphere,IT Services,1350000,60,USA,support@datasphere.com
+14,BuildRight,Construction,-1250000,90,USA,sales@buildright.com
