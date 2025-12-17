@@ -1,41 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, FileText, AlertCircle, CheckCircle, ArrowUpRight, TrendingUp, BarChart2 } from 'lucide-react';
+import { Upload, FileText, AlertCircle, CheckCircle, ArrowUpRight, TrendingUp, BarChart2, Loader } from 'lucide-react';
 import {
     LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import UploadModal from '../components/dashboard/UploadModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
+    const navigate = useNavigate();
     const [isUploadOpen, setIsUploadOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [dashboardData, setDashboardData] = useState({
+        stats: {
+            totalDatasets: 0,
+            avgScore: '0%',
+            criticalErrors: 0
+        },
+        trendData: [],
+        issueData: [],
+        recentUploads: []
+    });
 
-    // Mock Data for Charts
-    const trendData = [
-        { name: 'Mon', score: 65 }, { name: 'Tue', score: 72 }, { name: 'Wed', score: 68 },
-        { name: 'Thu', score: 85 }, { name: 'Fri', score: 82 }, { name: 'Sat', score: 91 }, { name: 'Sun', score: 88 },
-    ];
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                navigate('/login');
+                return;
+            }
 
-    const issueData = [
-        { name: 'Missing', value: 45 }, { name: 'Duplicate', value: 32 },
-        { name: 'Format', value: 24 }, { name: 'Anomaly', value: 18 },
-    ];
+            try {
+                const response = await fetch('http://localhost:4000/api/dashboard/stats', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setDashboardData(data);
+                }
+            } catch (error) {
+                console.error("Error fetching dashboard stats:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
+    }, [navigate]);
 
     const stats = [
-        { label: 'Total Datasets', value: '12', change: '+2 this week', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
-        { label: 'Avg Quality Score', value: '87%', change: '+5% improvement', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-        { label: 'Critical Errors', value: '34', change: '-12 fixed', icon: AlertCircle, color: 'text-amber-600', bg: 'bg-amber-50' },
+        { label: 'Total Datasets', value: dashboardData.stats.totalDatasets, change: 'All time', icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
+        { label: 'Avg Quality Score', value: dashboardData.stats.avgScore, change: 'Across all files', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+        { label: 'Total Issues Found', value: dashboardData.stats.criticalErrors, change: 'Detected', icon: AlertCircle, color: 'text-amber-600', bg: 'bg-amber-50' },
     ];
 
-    const recentUploads = [
-        { name: 'b2b_leads_q4.csv', date: '2 hours ago', score: 92, status: 'Clean' },
-        { name: 'customer_contacts_v2.xlsx', date: '5 hours ago', score: 64, status: 'Needs Attention' },
-        { name: 'legacy_import_2023.csv', date: '1 day ago', score: 45, status: 'Critical' },
-    ];
+    if (loading) return <div className="flex justify-center items-center h-64"><Loader className="animate-spin text-blue-600" /></div>;
 
     return (
         <div>
             {/* Upload Modal */}
-            <UploadModal isOpen={isUploadOpen} onClose={() => setIsUploadOpen(false)} />
+            <UploadModal isOpen={isUploadOpen} onClose={() => {
+                setIsUploadOpen(false);
+                // Refresh data after upload close (optional, or force refresh)
+                window.location.reload();
+            }} />
 
             {/* Header Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
@@ -87,13 +115,12 @@ export default function Dashboard() {
                 >
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                            <TrendingUp className="w-5 h-5 text-blue-600" /> Quality Trend
+                            <TrendingUp className="w-5 h-5 text-blue-600" /> Quality Trend (Last 7 Days)
                         </h3>
-                        <span className="text-sm text-green-600 bg-green-50 px-2 py-1 rounded font-medium">+12% vs last week</span>
                     </div>
                     <div className="h-64 cursor-default">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={trendData}>
+                            <AreaChart data={dashboardData.trendData}>
                                 <defs>
                                     <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1} />
@@ -127,7 +154,7 @@ export default function Dashboard() {
                     </div>
                     <div className="h-64 cursor-default">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={issueData} barSize={40}>
+                            <BarChart data={dashboardData.issueData} barSize={40}>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" />
                                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#64748B', fontSize: 12 }} dy={10} />
                                 <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748B', fontSize: 12 }} />
@@ -152,36 +179,43 @@ export default function Dashboard() {
             >
                 <div className="p-6 border-b border-slate-200 flex items-center justify-between">
                     <h2 className="text-lg font-bold text-slate-900">Recent Uploads</h2>
-                    <button className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                    <button
+                        onClick={() => navigate('/dashboard/datasets')}
+                        className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                    >
                         View All <ArrowUpRight className="w-4 h-4" />
                     </button>
                 </div>
                 <div className="divide-y divide-slate-100">
-                    {recentUploads.map((file) => (
-                        <div key={file.name} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer gap-4">
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center border border-blue-100">
-                                    <FileText className="w-5 h-5 text-blue-600" />
+                    {dashboardData.recentUploads.length > 0 ? (
+                        dashboardData.recentUploads.map((file) => (
+                            <div key={file.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center border border-blue-100">
+                                        <FileText className="w-5 h-5 text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-semibold text-slate-900">{file.name}</h4>
+                                        <p className="text-xs text-slate-500">{file.date}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 className="font-semibold text-slate-900">{file.name}</h4>
-                                    <p className="text-xs text-slate-500">{file.date}</p>
+                                <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+                                    <div className="text-right">
+                                        <div className="text-sm font-bold text-slate-900">{file.score}/100</div>
+                                        <div className="text-xs text-slate-500">Quality Score</div>
+                                    </div>
+                                    <div className={`px-3 py-1 rounded-full text-xs font-bold border ${file.status === 'Clean' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                                        file.status === 'Critical' ? 'bg-red-50 text-red-600 border-red-100' :
+                                            'bg-amber-50 text-amber-600 border-amber-100'
+                                        }`}>
+                                        {file.status}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
-                                <div className="text-right">
-                                    <div className="text-sm font-bold text-slate-900">{file.score}/100</div>
-                                    <div className="text-xs text-slate-500">Quality Score</div>
-                                </div>
-                                <div className={`px-3 py-1 rounded-full text-xs font-bold border ${file.status === 'Clean' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
-                                    file.status === 'Critical' ? 'bg-red-50 text-red-600 border-red-100' :
-                                        'bg-amber-50 text-amber-600 border-amber-100'
-                                    }`}>
-                                    {file.status}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <div className="p-8 text-center text-slate-500">No uploads yet. Upload a dataset to get started.</div>
+                    )}
                 </div>
             </motion.div>
         </div>

@@ -61,8 +61,12 @@ export default function UploadModal({ isOpen, onClose }) {
 
         try {
             // Call Node.js Backend
+            const token = localStorage.getItem('token');
             const response = await fetch('http://localhost:4000/api/upload', {
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
                 body: formData,
             });
 
@@ -73,13 +77,17 @@ export default function UploadModal({ isOpen, onClose }) {
             const data = await response.json();
 
             // Success
+            // Success
             setUploadStatus('success');
+            console.log('Upload Success:', data);
+
             setTimeout(() => {
                 onClose();
                 setFile(null);
                 setUploadStatus('idle');
                 setProgress(0);
-                navigate('/dashboard/scanning');
+                // Navigate to scanning page with the uploaded dataset info
+                navigate('/dashboard/scanning', { state: { dataset: data.dataset } });
             }, 1000);
 
         } catch (error) {

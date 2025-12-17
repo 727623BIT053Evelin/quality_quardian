@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link, Outlet } from 'react-router-dom';
-import { LayoutDashboard, Database, FileText, Settings, ShieldCheck, LogOut, Search, Bell, User } from 'lucide-react';
+import { LayoutDashboard, Database, FileText, Settings, ShieldCheck, Search, Bell, User } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 // Top Navbar Dashboard Layout to match "BuzzSumo" style (No Sidebar split)
@@ -11,6 +11,23 @@ export default function DashboardLayout() {
         { name: 'Reports', href: '/dashboard/reports', icon: FileText },
         { name: 'Settings', href: '/dashboard/settings', icon: Settings },
     ];
+
+    const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('user') || '{}'));
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    React.useEffect(() => {
+        const handleUserUpdate = () => {
+            setUser(JSON.parse(localStorage.getItem('user') || '{}'));
+        };
+
+        window.addEventListener('userUpdated', handleUserUpdate);
+        window.addEventListener('storage', handleUserUpdate); // Also listen for cross-tab updates
+
+        return () => {
+            window.removeEventListener('userUpdated', handleUserUpdate);
+            window.removeEventListener('storage', handleUserUpdate);
+        };
+    }, []);
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -55,18 +72,34 @@ export default function DashboardLayout() {
                                 <input
                                     type="text"
                                     placeholder="Search..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-64 bg-blue-700/50 border border-blue-400/30 rounded-full pl-9 pr-4 py-1.5 text-sm text-white placeholder:text-blue-200 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                                 />
                             </div>
 
-                            <button className="p-2 rounded-full text-blue-100 hover:bg-white/10 transition-colors relative">
+                            <Link
+                                to="/dashboard/settings"
+                                state={{ tab: 'notifications' }}
+                                className="p-2 rounded-full text-blue-100 hover:bg-white/10 transition-colors relative"
+                            >
                                 <Bell className="w-5 h-5" />
                                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-400 rounded-full border border-blue-600" />
-                            </button>
+                            </Link>
 
-                            <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center border border-white/30 cursor-pointer hover:bg-white/30 transition-colors">
-                                <User className="w-5 h-5 text-white" />
-                            </div>
+                            <Link to="/dashboard/settings">
+                                <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center border border-white/30 cursor-pointer hover:bg-white/30 transition-colors overflow-hidden">
+                                    {user.avatar ? (
+                                        <img
+                                            src={user.avatar.startsWith('http') ? user.avatar : `http://localhost:4000${user.avatar}`}
+                                            alt="User"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <span className="text-sm font-bold text-white">{(user.name || 'U')[0]}</span>
+                                    )}
+                                </div>
+                            </Link>
                         </div>
 
                     </div>
@@ -75,7 +108,7 @@ export default function DashboardLayout() {
 
             {/* Main Content Area */}
             <main className="flex-1 max-w-7xl mx-auto w-full p-6 md:p-8">
-                <Outlet />
+                <Outlet context={{ searchQuery }} />
             </main>
         </div>
     );

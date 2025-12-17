@@ -1,6 +1,11 @@
 flask
-flask-cors
 pandas
 numpy
+pycountry
+phonenumbers
+tldextract
+streamlit
+fastapi
 scikit-learn
 openpyxl
+flask-cors

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, FileText, AlertTriangle, XCircle, Search, Zap, CheckCircle } from 'lucide-react';
 
 export default function DatasetScanning() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const dataset = location.state?.dataset;
+
     const [scannedRows, setScannedRows] = useState(0);
-    const [totalRows] = useState(12450); // Simulated total
+    // Use real row count if available, else default
+    const totalRows = dataset?.report?.final_rows || 12450;
     const [currentAction, setCurrentAction] = useState('Initializing scan...');
 
     // Buckets for issues
@@ -16,27 +20,51 @@ export default function DatasetScanning() {
     const [anomalies, setAnomalies] = useState([]);
 
     useEffect(() => {
+        // If no dataset provided (e.g. direct access), maybe redirect back or show dummy
+        if (!dataset) {
+            // Optional: navigate('/dashboard'); 
+            // keeping dummy behavior for now if accessed directly
+        }
+
         // Simulation Timer
         const timer = setInterval(() => {
             setScannedRows(prev => {
-                const next = prev + Math.floor(Math.random() * 150) + 50;
+                const next = prev + Math.floor(Math.random() * (totalRows / 50)) + 50;
                 return next > totalRows ? totalRows : next;
             });
 
-            // Randomly found issues simulation
-            const rand = Math.random();
-            if (rand < 0.1) {
-                setMissingValues(prev => [...prev.slice(-5), { id: Date.now(), text: 'Row ' + Math.floor(Math.random() * 10000) }]);
-                setCurrentAction('Detecting missing values...');
-            } else if (rand < 0.2) {
-                setDuplicates(prev => [...prev.slice(-5), { id: Date.now(), text: 'Duplicate ID #' + Math.floor(Math.random() * 5000) }]);
-                setCurrentAction('Identifying duplicates...');
-            } else if (rand < 0.25) {
-                setFormattingErrors(prev => [...prev.slice(-5), { id: Date.now(), text: 'Invalid Email Format' }]);
-                setCurrentAction('Checking data formats...');
-            } else if (rand < 0.3) {
-                setAnomalies(prev => [...prev.slice(-5), { id: Date.now(), text: 'Outlier Detected: $999k' }]);
-                setCurrentAction('Analyzing statistical anomalies...');
+            // Randomly populate issues based on REAL report if available
+            if (dataset?.report) {
+                // Logic to show real issues incrementally would be complex to act out exactly,
+                // so we will simulate "finding" them if the counts > 0.
+
+                if (dataset.report.missing_values && Object.keys(dataset.report.missing_values).length > 0 && Math.random() < 0.1) {
+                    setMissingValues(prev => {
+                        if (prev.length >= Object.keys(dataset.report.missing_values).length) return prev;
+                        // Just showing generic messages for now as report structure for missing_values might be object
+                        return [...prev.slice(-5), { id: Date.now(), text: 'Missing value detected' }];
+                    });
+                    setCurrentAction('Detecting missing values...');
+                }
+
+                if (dataset.report.duplicates > 0 && Math.random() < 0.1) {
+                    setDuplicates(prev => {
+                        if (prev.length >= dataset.report.duplicates) return prev;
+                        return [...prev.slice(-5), { id: Date.now(), text: 'Duplicate row detected' }];
+                    });
+                    setCurrentAction('Identifying duplicates...');
+                }
+                // Add similar logic for others if needed, or keep random simulation for visual effect
+            } else {
+                // Fallback to purely random simulation
+                const rand = Math.random();
+                if (rand < 0.1) {
+                    setMissingValues(prev => [...prev.slice(-5), { id: Date.now(), text: 'Row ' + Math.floor(Math.random() * 10000) }]);
+                    setCurrentAction('Detecting missing values...');
+                } else if (rand < 0.2) {
+                    setDuplicates(prev => [...prev.slice(-5), { id: Date.now(), text: 'Duplicate ID #' + Math.floor(Math.random() * 5000) }]);
+                    setCurrentAction('Identifying duplicates...');
+                }
             }
 
         }, 100);
@@ -45,12 +73,13 @@ export default function DatasetScanning() {
         if (scannedRows >= totalRows) {
             clearInterval(timer);
             setTimeout(() => {
-                navigate('/report');
-            }, 1500);
+                // Navigate to Reports page (or specific report detail if we had one)
+                navigate('/dashboard/reports');
+            }, 1000);
         }
 
         return () => clearInterval(timer);
-    }, [scannedRows, totalRows, navigate]);
+    }, [scannedRows, totalRows, navigate, dataset]);
 
     const progressPercentage = (scannedRows / totalRows) * 100;
 

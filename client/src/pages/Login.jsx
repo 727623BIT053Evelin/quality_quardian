@@ -1,20 +1,46 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShieldCheck, Mail, Lock, ArrowRight, Github, Globe } from 'lucide-react';
+import { ShieldCheck, Mail, Lock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Login() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
+        setError('');
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('http://localhost:4000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Login failed');
+            }
+
+            // Save token and user info
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('user', JSON.stringify({ name: result.name, email: result.email }));
+
             navigate('/dashboard');
-        }, 1500);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -31,6 +57,12 @@ export default function Login() {
                     <p className="text-slate-500 mb-8">
                         Enter your credentials to access your data guardian dashboard.
                     </p>
+
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm">
+                            {error}
+                        </div>
+                    )}
 
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>

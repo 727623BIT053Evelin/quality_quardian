@@ -1,19 +1,45 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShieldCheck, Mail, Lock, User, Github, Globe, Zap } from 'lucide-react';
+import { ShieldCheck, Mail, Lock, User, Zap, Github } from 'lucide-react';
 
 export default function Signup() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
+        setError('');
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('http://localhost:4000/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Signup failed');
+            }
+
+            // Save token and user info
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('user', JSON.stringify({ name: result.name, email: result.email }));
+
             navigate('/dashboard');
-        }, 1500);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -27,7 +53,11 @@ export default function Signup() {
                     </Link>
 
                     <h2 className="text-3xl font-bold text-slate-900 mb-4">Create an account</h2>
-
+                    {error && (
+                        <div className="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm">
+                            {error}
+                        </div>
+                    )}
 
                     <form className="space-y-5" onSubmit={handleSubmit}>
                         <div>
@@ -63,6 +93,29 @@ export default function Signup() {
                                     placeholder="name@company.com"
                                 />
                                 <Mail className="w-5 h-5 text-slate-400 absolute left-3 top-3.5" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label htmlFor="role" className="block text-sm font-medium text-slate-700">
+                                Role
+                            </label>
+                            <div className="mt-1 relative">
+                                <select
+                                    id="role"
+                                    name="role"
+                                    required
+                                    className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none bg-white"
+                                >
+                                    <option value="" disabled selected>Select your role</option>
+                                    <option value="Data Scientist">Data Scientist</option>
+                                    <option value="Data Analyst">Data Analyst</option>
+                                    <option value="Data Engineer">Data Engineer</option>
+                                    <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                                    <option value="Software Engineer">Software Engineer</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <Zap className="w-5 h-5 text-slate-400 absolute left-3 top-3.5" />
                             </div>
                         </div>
 
