@@ -13,6 +13,7 @@ import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 
 import Datasets from './pages/Datasets';
+import ChatAssistant from './pages/ChatAssistant';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="datasets" element={<Datasets />} />
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="assistant" element={<ChatAssistant />} />
         </Route>
 
         <Route path="*" element={<LandingPage />} />

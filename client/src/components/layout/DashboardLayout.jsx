@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link, Outlet } from 'react-router-dom';
-import { LayoutDashboard, Database, FileText, Settings, ShieldCheck, Search, Bell, User } from 'lucide-react';
+import { LayoutDashboard, Database, FileText, Settings, ShieldCheck, Search, Bell, User, MessageSquare } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 // Top Navbar Dashboard Layout to match "BuzzSumo" style (No Sidebar split)
@@ -9,6 +9,7 @@ export default function DashboardLayout() {
         { name: 'Reports', href: '/dashboard/reports', icon: FileText },
         { name: 'Datasets', href: '/dashboard/datasets', icon: Database },
         { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+        { name: 'Assistant', href: '/dashboard/assistant', icon: MessageSquare },
         { name: 'Settings', href: '/dashboard/settings', icon: Settings },
     ];
 
@@ -47,20 +48,33 @@ export default function DashboardLayout() {
 
                             <nav className="hidden md:flex items-center space-x-1">
                                 {links.map((link) => (
-                                    <NavLink
-                                        key={link.name}
-                                        to={link.href}
-                                        end={link.href === '/dashboard'}
-                                        className={({ isActive }) => cn(
-                                            "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold transition-all",
-                                            isActive
-                                                ? "bg-white/20 text-white shadow-inner"
-                                                : "text-blue-100 hover:bg-white/10 hover:text-white"
-                                        )}
-                                    >
-                                        <link.icon className="w-4 h-4" />
-                                        {link.name}
-                                    </NavLink>
+                                    link.external ? (
+                                        <a
+                                            key={link.name}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold transition-all text-blue-100 hover:bg-white/10 hover:text-white"
+                                        >
+                                            <link.icon className="w-4 h-4" />
+                                            {link.name}
+                                        </a>
+                                    ) : (
+                                        <NavLink
+                                            key={link.name}
+                                            to={link.href}
+                                            end={link.href === '/dashboard'}
+                                            className={({ isActive }) => cn(
+                                                "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold transition-all",
+                                                isActive
+                                                    ? "bg-white/20 text-white shadow-inner"
+                                                    : "text-blue-100 hover:bg-white/10 hover:text-white"
+                                            )}
+                                        >
+                                            <link.icon className="w-4 h-4" />
+                                            {link.name}
+                                        </NavLink>
+                                    )
                                 ))}
                             </nav>
                         </div>

@@ -61,9 +61,9 @@ class DataAnalyzer:
              non_null = self.df[col].dropna()
              if len(non_null) > 0:
                  try:
-                     pd.to_datetime(non_null, errors='raise')
+                     pd.to_datetime(non_null, errors='raise', dayfirst=True)
                  except:
-                     converted = pd.to_datetime(non_null, errors='coerce')
+                     converted = pd.to_datetime(non_null, errors='coerce', dayfirst=True)
                      errors = converted.isna().sum()
                      if errors > 0:
                          formatting_issues[col] = int(errors)
