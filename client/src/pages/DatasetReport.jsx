@@ -207,40 +207,9 @@ export default function DatasetReport() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
 
-                {/* ACTION SECTION - STACKED LAYOUT */}
+                {/* ACTION SECTION - CHARTS FIRST LAYOUT */}
                 <div className="space-y-8">
-                    {/* 1. TOP ROW: Summary & Export (Full Width) */}
-                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
-                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8">
-                            <div className="flex-1">
-                                <h2 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
-                                    <Download className="w-6 h-6 text-blue-600" /> Summary & Export
-                                </h2>
-                                <p className="text-slate-500">
-                                    Your dataset has been processed. We've handled {missingCount} missing values, {report.duplicates || 0} duplicates, and fixed {report.inconsistencies || 0} formatting issues.
-                                </p>
-                            </div>
-                            <div className="w-full lg:w-auto">
-                                <button
-                                    onClick={handleDownload}
-                                    disabled={!dataset.cleanedPath}
-                                    className="w-full lg:w-64 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    <Download className="w-5 h-5" />
-                                    {dataset.cleanedPath ? "Download Corrected CSV" : "Processing..."}
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                            <ScoreCard label="Missing Values" value={qualityScores.missing + '%'} />
-                            <ScoreCard label="Duplicate Rows" value={qualityScores.duplicate + '%'} />
-                            <ScoreCard label="Formatting Issues" value={qualityScores.formatting + '%'} />
-                            <ScoreCard label="Overall Score" value={qualityScores.overall + '%'} highlight />
-                        </div>
-                    </div>
-
-                    {/* 2. BOTTOM ROW: Charts (Split 50/50) */}
+                    {/* ROW 1: Issue Distribution + Missing Values (50/50) */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                         {/* Issue Distribution Pie */}
                         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
@@ -332,6 +301,7 @@ export default function DatasetReport() {
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 {/* Data Preview Section */}
@@ -505,6 +475,49 @@ export default function DatasetReport() {
                         </div>
                     )}
                 </Section>
+
+                {/* Download Cleaned Data Section */}
+                <div className="flex justify-center">
+                    <div className="w-full lg:w-1/2 bg-white rounded-xl border border-slate-200 shadow-sm p-8">
+                        {/* Quality Scores Grid - Now at Top */}
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="bg-slate-50 rounded-lg p-4">
+                                <div className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Missing Score</div>
+                                <div className="text-2xl font-bold text-slate-900">{qualityScores.missing}%</div>
+                            </div>
+                            <div className="bg-slate-50 rounded-lg p-4">
+                                <div className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Duplicate Score</div>
+                                <div className="text-2xl font-bold text-slate-900">{qualityScores.duplicate}%</div>
+                            </div>
+                            <div className="bg-slate-50 rounded-lg p-4">
+                                <div className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-1">Formatting Score</div>
+                                <div className="text-2xl font-bold text-slate-900">{qualityScores.formatting}%</div>
+                            </div>
+                            <div className="bg-blue-50 rounded-lg p-4 border-2 border-blue-200">
+                                <div className="text-xs font-medium text-blue-600 uppercase tracking-wide mb-1">Overall</div>
+                                <div className="text-2xl font-bold text-blue-600">{qualityScores.overall}%</div>
+                            </div>
+                        </div>
+
+                        {/* Download Section - Now Below */}
+                        <div>
+                            <h2 className="text-xl font-bold text-slate-900 mb-3 flex items-center justify-center gap-2">
+                                <Download className="w-5 h-5 text-blue-600" /> Download Cleaned Data
+                            </h2>
+                            <p className="text-slate-600 text-sm mb-6">
+                                Your dataset has been processed. We've handled {missingCount} missing values, {report.duplicates || 0} duplicates, and fixed {report.inconsistencies || 0} formatting issues.
+                            </p>
+                            <button
+                                onClick={handleDownload}
+                                disabled={!dataset.cleanedPath}
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <Download className="w-5 h-5" />
+                                {dataset.cleanedPath ? "Download Corrected CSV" : "Processing..."}
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>

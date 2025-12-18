@@ -35,7 +35,7 @@ export default function Login() {
             localStorage.setItem('token', result.token);
             localStorage.setItem('user', JSON.stringify({ name: result.name, email: result.email }));
 
-            navigate('/dashboard');
+            navigate('/dashboard/reports');
         } catch (err) {
             setError(err.message);
         } finally {
