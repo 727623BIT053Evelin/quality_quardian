@@ -201,3 +201,40 @@ def fill_head_office_country(df: pd.DataFrame) -> pd.DataFrame:
         )
 
     return df
+
+
+def fill_company_age(df: pd.DataFrame, founded_col: str = 'founded_date', age_col: str = 'company_age') -> pd.DataFrame:
+    """
+    Fill missing company_age using founded_date.
+    
+    Logic:
+    1. If company_age is missing but founded_date exists → Calculate age from founded_date
+    2. If both are missing → Fill with 'Unknown'
+    
+    Args:
+        df: Input DataFrame
+        founded_col: Column name for founded date (default: 'founded_date')
+        age_col: Column name for company age (default: 'company_age')
+    
+    Returns:
+        DataFrame with filled company_age column
+    """
+    from datetime import datetime
+    
+    df = df.copy()
+    current_year = datetime.now().year
+
+    # Convert founded_date to datetime safely
+    if founded_col in df.columns:
+        df[founded_col] = pd.to_datetime(df[founded_col], errors='coerce')
+
+    # Fill missing company_age using founded_date
+    if age_col in df.columns and founded_col in df.columns:
+        mask = df[age_col].isna() & df[founded_col].notna()
+        df.loc[mask, age_col] = current_year - df.loc[mask, founded_col].dt.year
+
+    # If both are missing → Unknown
+    if age_col in df.columns:
+        df[age_col] = df[age_col].fillna('Unknown')
+
+    return df

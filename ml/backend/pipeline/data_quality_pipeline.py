@@ -6,7 +6,8 @@ from ..preprocessing.missing_values import (
     fill_contact_fields,
     fill_company_name,
     fill_website,
-    fill_head_office_country
+    fill_head_office_country,
+    fill_company_age
 )
 
 from ..preprocessing.normalization import (
@@ -132,6 +133,7 @@ def run_data_quality_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     df = fill_company_name(df)
     df = fill_contact_fields(df)
     df = fill_website(df)
+    df = fill_company_age(df)  # Fill company_age from founded_date
 
     if 'industry' in df.columns:
         df['industry'] = df['industry'].fillna('Unknown Industry')
