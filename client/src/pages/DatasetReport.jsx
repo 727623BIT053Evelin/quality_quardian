@@ -5,7 +5,10 @@ import {
     Download, FileText, CheckCircle, AlertTriangle, XCircle, Zap,
     ArrowRight, ShieldCheck, BarChart2, Search, Loader
 } from 'lucide-react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import {
+    PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend,
+    BarChart, Bar, XAxis, YAxis, CartesianGrid
+} from 'recharts';
 
 export default function DatasetReport() {
     const { id } = useParams();
@@ -51,7 +54,7 @@ export default function DatasetReport() {
         : (report.missing_values ? Object.keys(report.missing_values).length : 10);
     const totalCells = rowCount * colCount;
 
-    // 1. Missing Values Score (% of filled cells)
+    // 1. Missing Values Rate (% of missing cells)
     let totalMissing = 0;
     if (report.missing_values) {
         if (typeof report.missing_values === 'object') {
@@ -60,24 +63,25 @@ export default function DatasetReport() {
             totalMissing = report.missing_values;
         }
     }
-    const missingScore = Math.max(0, ((totalCells - totalMissing) / totalCells) * 100);
+    const missingRate = (totalMissing / totalCells) * 100;
 
-    // 2. Duplicate Score (% of unique rows)
+    // 2. Duplicate Rate (% of duplicate rows)
     const duplicateCount = report.duplicates || 0;
-    const duplicateScore = Math.max(0, ((rowCount - duplicateCount) / rowCount) * 100);
+    const duplicateRate = (duplicateCount / rowCount) * 100;
 
-    // 3. Formatting Score (Invalid Formats)
+    // 3. Formatting Rate (Invalid Formats)
     const formattingCount = report.inconsistencies || 0;
-    const formattingScore = Math.max(0, ((totalCells - formattingCount) / totalCells) * 100);
+    const formattingRate = (formattingCount / totalCells) * 100;
 
-    // 4. Overall Score
-    // Calculate as average of the three dimension scores for better representativeness
-    const overallScore = (missingScore + duplicateScore + formattingScore) / 3;
+    // 4. Overall Score (Health)
+    // 100 - average error rate for better intuitive "score"
+    const avgError = (missingRate + duplicateRate + formattingRate) / 3;
+    const overallScore = Math.max(0, 100 - avgError);
 
     const qualityScores = {
-        missing: missingScore.toFixed(1),
-        duplicate: duplicateScore.toFixed(1),
-        formatting: formattingScore.toFixed(1),
+        missing: missingRate.toFixed(1),
+        duplicate: duplicateRate.toFixed(1),
+        formatting: formattingRate.toFixed(1),
         overall: overallScore.toFixed(1)
     };
 
@@ -92,11 +96,83 @@ export default function DatasetReport() {
         { name: 'Formatting', value: report.inconsistencies || 0, color: '#F97316' },
     ].filter(item => item.value > 0); // Only show existing errors
 
-    // Missing Values Table Data
+    // Missing Values Table Data (Sorted by count descending)
     const missingValuesData = report.missing_values && typeof report.missing_values === 'object'
-        ? Object.entries(report.missing_values).map(([col, count]) => ({ column: col, count }))
+        ? Object.entries(report.missing_values)
+            .map(([col, count]) => ({ column: col, count }))
+            .sort((a, b) => b.count - a.count)
         : [];
 
+    // Formatting Inconsistencies Data (Sorted by count descending)
+    const formattingValuesData = report.formatting_issues && typeof report.formatting_issues === 'object'
+        ? Object.entries(report.formatting_issues)
+            .map(([col, count]) => ({ column: col, count }))
+            .sort((a, b) => b.count - a.count)
+        : [];
+
+
+    // Validation Helpers for Highlighting
+    const isMissing = (val) => {
+        if (val === null || val === undefined) return true;
+        const s = String(val).toLowerCase().trim();
+        return s === '' || s === '-' || s === 'null' || s === 'nan' || s === 'n/a' || s === 'undefined';
+    };
+
+    const isInvalidFormat = (col, val) => {
+        if (isMissing(val)) return false;
+        const sVal = String(val).trim();
+        const colLower = col.toLowerCase();
+
+        // 1. Email Validation
+        if (colLower.includes('email')) {
+            return !/^[\w\.-]+@[\w\.-]+\.\w+$/.test(sVal);
+        }
+
+        // 2. Phone Validation
+        if (colLower.includes('phone') || colLower.includes('mobile')) {
+            const cleanPhone = sVal.replace(/[-\s()]/g, '');
+            return !/^\+?[1-9]\d{1,14}$/.test(cleanPhone) || cleanPhone.length < 7;
+        }
+
+        // 3. Date Validation
+        if (colLower.includes('date') || colLower.includes('time') || colLower.includes('founded')) {
+            const date = new Date(sVal);
+            return isNaN(date.getTime()) || sVal.length < 4;
+        }
+
+        // 4. Numeric / Revenue / Price / Size Validation
+        if (colLower.includes('revenue') || colLower.includes('price') || colLower.includes('amount') || colLower.includes('size')) {
+            // Remove currency symbols, commas, and 'k'/'m' suffixes for checking
+            const numericCheck = sVal.replace(/[$,]/g, '').toLowerCase();
+            const hasLetters = /[a-z]/i.test(numericCheck.replace(/[km]/g, ''));
+            return hasLetters || isNaN(parseFloat(numericCheck.replace(/[km]/g, '')));
+        }
+
+        // 5. Country Validation (Should not be numeric)
+        if (colLower.includes('country')) {
+            return /^\d+$/.test(sVal) || sVal.length < 2;
+        }
+
+        // 6. Website / Domain Validation
+        if (colLower.includes('website') || colLower.includes('domain') || colLower.includes('url')) {
+            const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9](\.[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]?)+$/;
+            return !domainRegex.test(sVal.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('/')[0]);
+        }
+
+        // 7. Generic Text Columns (Industry, Name, Title) - should not be purely numeric
+        if (colLower.includes('name') || colLower.includes('industry') || colLower.includes('title') || colLower.includes('job')) {
+            return /^\d+$/.test(sVal) && sVal.length > 0;
+        }
+
+        return false;
+    };
+
+    const getCellColor = (col, val, tab) => {
+        if (tab !== 'original') return ''; // Only highlight original data
+        if (isMissing(val)) return 'bg-green-100/60 text-green-900 font-medium'; // Light green for missing
+        if (isInvalidFormat(col, val)) return 'bg-red-100/60 text-red-800'; // More visible red
+        return '';
+    };
 
     // --- Actions ---
     const handleDownload = async () => {
@@ -131,73 +207,199 @@ export default function DatasetReport() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
 
-                {/* ACTION SECTION */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-                    {/* Left: Download & Summary */}
+                {/* ACTION SECTION - STACKED LAYOUT */}
+                <div className="space-y-8">
+                    {/* 1. TOP ROW: Summary & Export (Full Width) */}
                     <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
-                        <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                            <Download className="w-6 h-6 text-blue-600" /> Download Cleaned Data
-                        </h2>
-                        <p className="text-slate-500 mb-6">
-                            Your dataset has been processed. We've handled {missingCount} missing values, {report.duplicates || 0} duplicates, and fixed {report.inconsistencies || 0} formatting issues.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                            <button
-                                onClick={handleDownload}
-                                disabled={!dataset.cleanedPath}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <Download className="w-5 h-5" />
-                                {dataset.cleanedPath ? "Download Corrected CSV" : "Processing..."}
-                            </button>
+                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-8">
+                            <div className="flex-1">
+                                <h2 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                                    <Download className="w-6 h-6 text-blue-600" /> Summary & Export
+                                </h2>
+                                <p className="text-slate-500">
+                                    Your dataset has been processed. We've handled {missingCount} missing values, {report.duplicates || 0} duplicates, and fixed {report.inconsistencies || 0} formatting issues.
+                                </p>
+                            </div>
+                            <div className="w-full lg:w-auto">
+                                <button
+                                    onClick={handleDownload}
+                                    disabled={!dataset.cleanedPath}
+                                    className="w-full lg:w-64 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <Download className="w-5 h-5" />
+                                    {dataset.cleanedPath ? "Download Corrected CSV" : "Processing..."}
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <ScoreCard label="Missing Score" value={qualityScores.missing + '%'} />
-                            <ScoreCard label="Duplicate Score" value={qualityScores.duplicate + '%'} />
-                            <ScoreCard label="Formatting Score" value={qualityScores.formatting + '%'} />
-                            <ScoreCard label="Overall" value={qualityScores.overall + '%'} highlight />
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                            <ScoreCard label="Missing Values" value={qualityScores.missing + '%'} />
+                            <ScoreCard label="Duplicate Rows" value={qualityScores.duplicate + '%'} />
+                            <ScoreCard label="Formatting Issues" value={qualityScores.formatting + '%'} />
+                            <ScoreCard label="Overall Score" value={qualityScores.overall + '%'} highlight />
                         </div>
                     </div>
 
-                    {/* Right: Pie Chart */}
-                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 h-full min-h-[400px]">
-                        <h3 className="text-lg font-bold text-slate-900 mb-2">Issue Distribution</h3>
-                        <p className="text-slate-500 text-sm mb-6">Breakdown of quality issues detected.</p>
-                        <div className="h-64 w-full">
-                            {errorDistribution.length > 0 ? (
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <PieChart>
-                                        <Pie
-                                            data={errorDistribution}
-                                            cx="50%"
-                                            cy="50%"
-                                            innerRadius={60}
-                                            outerRadius={100}
-                                            paddingAngle={5}
-                                            dataKey="value"
-                                        >
-                                            {errorDistribution.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
-                                            ))}
-                                        </Pie>
-                                        <Tooltip contentStyle={{ borderRadius: '8px' }} />
-                                        <Legend verticalAlign="bottom" height={36} iconType="circle" />
-                                    </PieChart>
-                                </ResponsiveContainer>
-                            ) : (
-                                <div className="h-full flex items-center justify-center text-slate-400">
-                                    <div className="flex flex-col items-center">
-                                        <CheckCircle className="w-12 h-12 text-green-200 mb-2" />
-                                        <span>No issues found! Perfect score.</span>
+                    {/* 2. BOTTOM ROW: Charts (Split 50/50) */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                        {/* Issue Distribution Pie */}
+                        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
+                            <h3 className="text-lg font-bold text-slate-900 mb-2">Issue Distribution</h3>
+                            <p className="text-slate-500 text-sm mb-6">Overall breakdown of quality flags.</p>
+                            <div className="h-64 w-full">
+                                {errorDistribution.length > 0 ? (
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <PieChart>
+                                            <Pie
+                                                data={errorDistribution}
+                                                cx="50%"
+                                                cy="50%"
+                                                innerRadius={60}
+                                                outerRadius={100}
+                                                paddingAngle={5}
+                                                dataKey="value"
+                                            >
+                                                {errorDistribution.map((entry, index) => (
+                                                    <Cell key={`cell-${index}`} fill={entry.color} />
+                                                ))}
+                                            </Pie>
+                                            <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
+                                            <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                ) : (
+                                    <div className="h-full flex items-center justify-center text-slate-400">
+                                        <div className="flex flex-col items-center">
+                                            <CheckCircle className="w-12 h-12 text-green-200 mb-2" />
+                                            <span>Perfect Quality!</span>
+                                        </div>
                                     </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Missing Values Bar */}
+                        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8">
+                            <h3 className="text-lg font-bold text-slate-900 mb-2">Missing Values</h3>
+                            <p className="text-slate-500 text-sm mb-6">Column-wise breakdown of data gaps.</p>
+                            <div className="h-64 w-full">
+                                {missingValuesData.length > 0 ? (
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <BarChart
+                                            data={missingValuesData}
+                                            layout="vertical"
+                                            margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E2E8F0" />
+                                            <XAxis type="number" hide />
+                                            <YAxis
+                                                dataKey="column"
+                                                type="category"
+                                                width={100}
+                                                fontSize={12}
+                                                tickLine={false}
+                                                axisLine={false}
+                                                className="font-medium text-slate-600"
+                                            />
+                                            <Tooltip
+                                                cursor={{ fill: '#F0F9FF' }}
+                                                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                                                labelClassName="font-bold text-slate-900"
+                                            />
+                                            <Bar
+                                                dataKey="count"
+                                                fill="#EF4444"
+                                                radius={[0, 4, 4, 0]}
+                                                barSize={20}
+                                            >
+                                                {missingValuesData.map((entry, index) => (
+                                                    <Cell
+                                                        key={`cell-${index}`}
+                                                        fill={entry.count > (rowCount * 0.5) ? '#EF4444' : entry.count > (rowCount * 0.2) ? '#F59E0B' : '#3B82F6'}
+                                                    />
+                                                ))}
+                                            </Bar>
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                ) : (
+                                    <div className="h-full flex items-center justify-center text-slate-400">
+                                        <div className="flex flex-col items-center">
+                                            <ShieldCheck className="w-12 h-12 text-blue-200 mb-2" />
+                                            <span>No gaps detected.</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Data Preview Section */}
+                <Section title="Data Preview" icon={BarChart2} color="text-blue-600">
+                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden min-h-[400px]">
+                        <div className="flex border-b border-slate-200">
+                            <button
+                                onClick={() => setActiveTab('cleaned')}
+                                className={`px-6 py-4 text-sm font-semibold transition-colors ${activeTab === 'cleaned' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                Cleaned Data (Preview)
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('original')}
+                                className={`px-6 py-4 text-sm font-semibold transition-colors ${activeTab === 'original' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                Original Data (Preview)
+                            </button>
+                        </div>
+
+                        <div className="overflow-x-auto">
+                            {dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'] && dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'].length > 0 ? (
+                                <table className="w-full text-sm text-left text-slate-600">
+                                    <thead className="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200">
+                                        <tr>
+                                            {Object.keys(dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'][0]).map((header) => (
+                                                <th key={header} scope="col" className="px-6 py-3 whitespace-nowrap">
+                                                    {header}
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'].map((row, index) => (
+                                            <tr key={index} className="bg-white border-b hover:bg-slate-50">
+                                                {Object.entries(row).map(([col, cell], i) => (
+                                                    <td
+                                                        key={i}
+                                                        className={`px-6 py-4 whitespace-nowrap transition-colors ${getCellColor(col, cell, activeTab)}`}
+                                                    >
+                                                        {cell !== null && cell !== undefined ? String(cell) : '-'}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="p-8 text-center text-slate-400">
+                                    No preview data available.
                                 </div>
                             )}
                         </div>
                     </div>
-                </div>
+                    {/* Legend for highlighting */}
+                    {activeTab === 'original' && (
+                        <div className="mt-4 flex gap-6 text-xs font-semibold px-2">
+                            <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 bg-green-100/60 border border-green-200 rounded shadow-sm"></div>
+                                <span className="text-slate-600">Missing Value</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 bg-red-100/60 border border-red-200 rounded shadow-sm"></div>
+                                <span className="text-slate-600">Invalid Format</span>
+                            </div>
+                        </div>
+                    )}
+                </Section>
 
                 {/* Missing Values Analysis */}
                 {missingValuesData.length > 0 && (
@@ -304,56 +506,7 @@ export default function DatasetReport() {
                     )}
                 </Section>
 
-                {/* Data Preview Section */}
-                <Section title="Data Preview" icon={BarChart2} color="text-blue-600">
-                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden min-h-[400px]">
-                        <div className="flex border-b border-slate-200">
-                            <button
-                                onClick={() => setActiveTab('cleaned')}
-                                className={`px-6 py-4 text-sm font-semibold transition-colors ${activeTab === 'cleaned' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' : 'text-slate-500 hover:text-slate-700'}`}
-                            >
-                                Cleaned Data (Preview)
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('original')}
-                                className={`px-6 py-4 text-sm font-semibold transition-colors ${activeTab === 'original' ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50' : 'text-slate-500 hover:text-slate-700'}`}
-                            >
-                                Original Data (Preview)
-                            </button>
-                        </div>
 
-                        <div className="overflow-x-auto">
-                            {dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'] && dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'].length > 0 ? (
-                                <table className="w-full text-sm text-left text-slate-600">
-                                    <thead className="text-xs text-slate-700 uppercase bg-slate-50 border-b border-slate-200">
-                                        <tr>
-                                            {Object.keys(dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'][0]).map((header) => (
-                                                <th key={header} scope="col" className="px-6 py-3 whitespace-nowrap">
-                                                    {header}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {dataset[activeTab === 'original' ? 'preview_original' : 'preview_cleaned'].map((row, index) => (
-                                            <tr key={index} className="bg-white border-b hover:bg-slate-50">
-                                                {Object.values(row).map((cell, i) => (
-                                                    <td key={i} className="px-6 py-4 whitespace-nowrap">
-                                                        {cell !== null && cell !== undefined ? String(cell) : '-'}
-                                                    </td>
-                                                ))}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            ) : (
-                                <div className="p-8 text-center text-slate-400">
-                                    No preview data available.
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </Section>
             </div>
         </div>
     );

@@ -6,9 +6,9 @@ import { cn } from '../../lib/utils';
 // Top Navbar Dashboard Layout to match "BuzzSumo" style (No Sidebar split)
 export default function DashboardLayout() {
     const links = [
-        { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
-        { name: 'Datasets', href: '/dashboard/datasets', icon: Database },
         { name: 'Reports', href: '/dashboard/reports', icon: FileText },
+        { name: 'Datasets', href: '/dashboard/datasets', icon: Database },
+        { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
         { name: 'Settings', href: '/dashboard/settings', icon: Settings },
     ];
 

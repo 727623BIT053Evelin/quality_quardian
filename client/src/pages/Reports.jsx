@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Search, Filter, BarChart2, AlertCircle, CheckCircle, ArrowRight, LayoutGrid, List } from 'lucide-react';
+import { FileText, Search, Filter, BarChart2, AlertCircle, CheckCircle, ArrowRight, LayoutGrid, List, Upload } from 'lucide-react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import UploadModal from '../components/dashboard/UploadModal';
 
 export default function Reports() {
     const navigate = useNavigate();
@@ -9,35 +10,36 @@ export default function Reports() {
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+    const [isUploadOpen, setIsUploadOpen] = useState(false);
 
+    const fetchReports = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:4000/api/datasets', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            const formattedReports = data.map(d => ({
+                id: d._id.slice(-6),
+                fullId: d._id,
+                name: d.filename,
+                date: new Date(d.uploadDate).toLocaleDateString(),
+                status: d.status.charAt(0).toUpperCase() + d.status.slice(1),
+                score: d.report?.quality_score || 0,
+                issues: {
+                    missing: typeof d.report?.missing_values === 'number' ? d.report.missing_values : Object.values(d.report?.missing_values || {}).reduce((a, b) => a + b, 0),
+                    duplicates: d.report?.duplicates || 0,
+                    formatting: d.report?.inconsistencies || 0
+                }
+            }));
+            setReports(formattedReports);
+        } catch (error) {
+            console.error("Failed to fetch reports:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
     useEffect(() => {
-        const fetchReports = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await fetch('http://localhost:4000/api/datasets', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const data = await response.json();
-                const formattedReports = data.map(d => ({
-                    id: d._id.slice(-6),
-                    fullId: d._id,
-                    name: d.filename,
-                    date: new Date(d.uploadDate).toLocaleDateString(),
-                    status: d.status.charAt(0).toUpperCase() + d.status.slice(1),
-                    score: d.report?.quality_score || 0,
-                    issues: {
-                        missing: typeof d.report?.missing_values === 'number' ? d.report.missing_values : Object.values(d.report?.missing_values || {}).reduce((a, b) => a + b, 0),
-                        duplicates: d.report?.duplicates || 0,
-                        formatting: d.report?.inconsistencies || 0
-                    }
-                }));
-                setReports(formattedReports);
-            } catch (error) {
-                console.error("Failed to fetch reports:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
         fetchReports();
     }, []);
 
@@ -62,6 +64,12 @@ export default function Reports() {
                     <p className="text-slate-500">Deep dive into your data quality insights and historical trends.</p>
                 </div>
                 <div className="flex gap-4 justify-end items-start">
+                    <button
+                        onClick={() => setIsUploadOpen(true)}
+                        className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-bold shadow-md shadow-blue-600/20"
+                    >
+                        <Upload className="w-4 h-4" /> Upload New
+                    </button>
                     <div className="flex bg-slate-100 p-1 rounded-lg">
                         <button
                             onClick={() => setViewMode('grid')}
@@ -153,6 +161,11 @@ export default function Reports() {
                     </div>
                 </div>
             )}
+
+            <UploadModal isOpen={isUploadOpen} onClose={() => {
+                setIsUploadOpen(false);
+                fetchReports();
+            }} />
         </div>
     );
 }

@@ -79,19 +79,21 @@ class DataAnalyzer:
         return self.report
 
     def calculate_quality_score(self):
-        # 1. Completeness Score (Missing)
+        # 1. Missing Rate (%)
         total_missing = sum(self.report['missing_values'].values())
         total_cells = max(1, self.df.size)
-        completeness_score = max(0, (1 - total_missing / total_cells) * 100)
+        missing_rate = (total_missing / total_cells) * 100
         
-        # 2. Uniqueness Score (Duplicates)
+        # 2. Duplicate Rate (%)
         total_rows = max(1, len(self.df))
-        uniqueness_score = max(0, (1 - self.report['duplicates'] / total_rows) * 100)
+        duplicate_rate = (self.report['duplicates'] / total_rows) * 100
         
-        # 3. Validity Score (Formatting)
-        validity_score = max(0, (1 - self.report['inconsistencies'] / total_cells) * 100)
+        # 3. Formatting Issue Rate (%)
+        validity_issue_rate = (self.report['inconsistencies'] / total_cells) * 100
         
-        # Final Score is average of components
-        final_score = (completeness_score + uniqueness_score + validity_score) / 3
+        # Final Score is still a "Quality Health" metric (higher is better)
+        # Calculated as 100 - Average Error Rate
+        avg_error = (missing_rate + duplicate_rate + validity_issue_rate) / 3
+        quality_health_score = max(0, 100 - avg_error)
         
-        return round(final_score, 1)
+        return round(quality_health_score, 1)
