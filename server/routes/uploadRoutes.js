@@ -162,7 +162,14 @@ router.get('/datasets/:id/download', protect, async (req, res) => {
         }
 
         // Set filename for download
-        const downloadName = type === 'cleaned' ? `cleaned-${dataset.filename}` : dataset.filename;
+        let downloadName = type === 'cleaned' ? `cleaned-${dataset.filename}` : dataset.filename;
+
+        // Force .csv extension for cleaned files
+        if (type === 'cleaned') {
+            const baseName = path.parse(downloadName).name;
+            downloadName = `${baseName}.csv`;
+        }
+
         res.download(filePath, downloadName);
 
     } catch (error) {

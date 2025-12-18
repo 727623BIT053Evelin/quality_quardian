@@ -1,0 +1,501 @@
+id,company_name,first_name,middle_name,last_name,jobtitle,people_email,people_email_score,domain,company_name_is_valid,company_name_issue,people_email_is_valid,people_email_issue,people_email_score_is_valid,people_email_score_issue,first_name_is_valid,first_name_issue,middle_name_is_valid,middle_name_issue,last_name_is_valid,last_name_issue,jobtitle_is_valid,jobtitle_issue,role_description,is_duplicate
+82,Ej Sealant Services Ltd,Ej Sealant Services Ltd,,,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+62,Yobatrends Ltd,Yobatrends Ltd,,Home Of Trending Goods,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+410,Hampshire & Islands Area Quaker Meeting,Winchester Quaker,,Warden,Warden,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+409,Eureka Financial Solutions,Eureka,,Financial Solutions,Financial Solutions,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Finance,False
+414,5G-Xcast 5Gppp Project,5gxcast,,Admin,Admin,,,None,True,,,Missing,,Missing,False,Contains numbers,,Missing,True,,False,Invalid job title,Admin,False
+438,Aumanti Jewellery Store,Aumanti,,Jewellery Store,Jewellery Store,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+381,As,Aa,,Bb,MD,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,False,Too short,Leadership,False
+288,Tb,Darren,,Jones,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+154,Royal Bank Of Scotland,Donna,,Stevens,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+11,Ojb Ventures Ltd,Ojb Ventures Ltd,,Oladapo Bendele Oyewobi,Director Of Operations,+,,None,True,,False,Invalid format,,Missing,True,,,Missing,True,,True,,Operations,False
+22,Dor-Master Ltd,Dormasterltd,,Mason,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+473,John Kenny Photography,John,,Photographer,Photographer,hello@johnkennyphotography.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Production,False
+172,Unknown Company,Ian,,Tracey,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+370,Nhs,Aa,,Bb,Nurse,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Medical,False
+443,Pro Uk Djs,Renzi,,Dj,DJ,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Production,False
+335,Global Systems,Aa,,Yusuf,Engineer,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Engineering & Development,False
+106,Herbalife,Steven,,Dowson,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+450,Self Employed,Glenn Dec,,Painter,Painter,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+392,Aa Accountancy Ltd,Aa,,Accountancy,Accountant,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Finance,False
+250,Tcs,Rajshree,,Dehulia,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+384,Iscr Consulting Ltd,Aa,,Khan,Managing Director,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+159,Asmiths (Estate And Letting Agents),Andy,,Smith,Andy Smith,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+436,The Central Market Agency Ltd,Administrator,,Administrator,Administrator,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+23,Self,P&p Landscapesltd,,Paul Glass,Landscaper,,,None,True,,,Missing,,Missing,False,Invalid characters,,Missing,True,,True,,Engineering & Development,False
+180,Chelsea Football Club,Oppong,,Percius,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+273,Avais Hyder Liaquat Nauman Chartered Accountants,Bob,,Dee,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+348,Gh Printing,Aa,,Muchkins,Sales Generalist,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Sales,False
+407,Inotectural,Inotectural,,Architectural Services,Architectural Services,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+403,Tbol,Tbol,,Tbol,Tbol,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+330,Countrywide Estate Agents,Aa,,A,Negotiator,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,True,,Sales,False
+499,Herrador,Tony,,Farrier,Farrier,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+133,Ids Media Group,Eamonn,,Worsford,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+389,Aqs Environmental Solutions,Aa,,Asd,Manager,info@aqssolutions.ie,90.0,None,True,,True,,False,Invalid format,False,Dummy value,,Missing,True,,True,,Leadership,False
+489,Positive Group,Positive,,Admin,Admin,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+26,Tourmed Uk Ltd.,Tourmed Uk Ltd,,Lilia,Assistance Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+53,Selfemployed,Matispeed Ltd,,,Courier Delivery Own Van,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Operations,False
+221,Bank Of Ireland,Helen,,Breen,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+209,British Airways,Rafal,,Mackowiak,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+57,Cad Thermal Insulation Ltd,Cad Thermal Insulation Ltd,,Darran Axtell,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+302,Smartdecks Ltd,A A,,Stewart,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+375,Iopoi,Aa,,Bbbbbbb,Material Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+9,Cornish Pasty Co Ltd,Cornish Pasty Co Ltd,,Marie Hart,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+122,Herbalife,Jelena,,Vukelic,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+241,British Airways,Sarah,,Lee,Ba,sarah.lee@ba.com,99.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+441,Longridge Cricket Club,Longridge,,Cricket Club,Cricket Club,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+216,Ttca,Peter,,Oscar,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+394,Baba,Aa,,Aaa,Account Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Sales,False
+73,Smart Payment Solutions Ltd,Smart Payment Solutions Ltd,,,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+281,Mycompany,Sakura,,Tendo,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+309,Tesco Stores Ltd,A A,,Mamun,Customer Assistant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Customer Support,False
+78,Rs&P Innovation Ltd.,Rs&p Innovation Ltd,,Bg Agency In Uk,Director,,,None,True,,,Missing,,Missing,False,Invalid characters,,Missing,True,,True,,Leadership,False
+131,Cuk,Peter,,Wilkinson,Debt Collection,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+399,Microsoft,Aa,,Bb,Project Development Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Leadership,False
+454,Storeys:Ssp,Neil,,Director,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+482,Aman Solicitors Advocates,Aman,,Solicitors,Solicitors,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Legal,False
+245,Wbs,Md,,Gym,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+89,Alfx Ltd,Alfx Ltd,,Bj,Audio Visual Specialist,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Production,False
+67,Britdoors Group Ltd,Britdoors Group Ltd,,Composite Doors,Door Manufacturer,britdoors@britdoorsgroup.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Production,False
+382,Brookman May Ltd,Aa,,Aardvark,Managing Partner,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+391,Appleone Employment Services,Aa,,Bb,Project Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Leadership,False
+427,Mpm Medhurst Property Maintenance,Sean Medhurst,,Plasterer,Plasterer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+328,Voluntary Work,Aa,,A,Ukcc/ecb Level 2 Coach,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,False,Invalid characters,Admin,False
+352,Patho,Aa,,Selim,Path,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Invalid job title,Education,False
+469,Bilding,Bob,,Bilder,Bilder,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+365,Jkjin,Aa,,Aafh,Jhjil,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Operations,False
+61,Legend Sports Ltd,Legend Sports Ltd,,,General Manager,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+270,British Airways,Don,,Masterson,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+398,Of,Aa,,Sasd,Educator,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Education,False
+184,Royal Opera House,Tom,,Ali,Covent Garden,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+110,Herbalife An Independent Distributor,Rebecca,,Gray,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+212,Head Designs,Roy,,Van,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+114,Herbalife,David,,Williams,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+404,Express & Echo,Echo,,Sports Awards,Sports Awards,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Marketing,False
+411,Obzidian,Obzidian,,Band,Band,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Production,False
+368,Nhs,Aa,,H,Nurse,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,True,,Medical,False
+423,Xxact Safety Solutions Bv,Xx,,Xx,XX,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,False,Too short,Admin,False
+8,Hf Holidays,Hf Holidays Ltd,,Selworthy,Manager,hf@hfholidays.co.uk,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Leadership,False
+68,Derby Bearings Limited,Derby Bearings Ltd,,Darron Horne,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+64,Yiatrou Contract Tiling Ltd,Experttilesltd,,Tiling,Tile Merchant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+355,Npower,Aa,,S,Analyst,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,True,,Data & Analytics,False
+13,Mp Screeding Ltd,Mpscreedingltd,,Mpscreedingltd,Co Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+289,Estee Lauder,Dawn,,Zerbinati,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+261,Precia Molen Uk,Jo,,Wong,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+186,Unknown Company,Orr,,,Oxford Circus,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+377,"Bright Futures, A College And Career Management Company",Aa,,Sss,Sssssssss,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+83,Dacoly Ltd,Dacoly Ltd,,Painting Decoration,Painting And Decoration,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+206,Ba,Alan,,Palmer,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+492,Product Testing,Cea,,Tester,Tester,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Engineering & Development,False
+124,Selfemployed,Kirsty,,Lewis-langley,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+58,Sticx Ltd,Sticx Ltd,,Timber Frame Speacialist,Timber Frame Specialist,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+490,Make It Happen,Hayley Ryan,,Transformational Coach,Transformational Coach,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+471,Drew Primary School,Drew Primary,,School,School,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Education,False
+300,Xyz,Paul,,Pattisseri,Ba,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+345,Agilent Technologies,Aa,,A,Account Executivea,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,True,,Sales,False
+291,Hq,Jale,,Ratu,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+266,Mckinsey New Ventures (Part Of Mckinsey & Company),Lilly,,Betty,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+313,Hs Broadcasting (Pvt) Ltd,A A,,Shah,Executive,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+174,Chelsea Football Club,Kushal,,Chhetri,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+344,Bsg,Aa,,Mmikr,Sales Managet,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Sales,False
+369,Nhs,Aa,,Lister,Health Care Assistant,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+259,"Phinix, Llc",Uday,,Kiran,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+3,Cuav Ltd,Cuav Ltd,,Drone Services,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+32,"Accounting, Tax And Bookkeeping Services",Seniguk Consulting Ltd,,,Company,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,False,Invalid job title,Admin,False
+447,Consultancy,Alex,,Dgsa,Dgsa,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+494,Sd Deacon,Joey,,Deacon,Deacon,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+156,Welland Steam Rally,Graham,,Probert,Vintage Cars,gprobert381@btinternet.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+224,Ml,Zahir,,Mohammad,Ba,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+364,Technik,Aa,,Aew,Owner,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+475,Thames Water,Garry Frew,,Senior Project Manager,Senior Project Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+367,Aa,Aa,,Kh,Order Picker,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+496,Farmasi,Udhink,,Dnr,Dnr,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+37,Umv Pvt Ltd,Umv Private Ltd,,Export Import Trading Organisation,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+225,Syntel,Ashwini,,Nair,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+320,Freeman Harris Solicitors,A A,,Hafezi,Solicitor Practicing As A Consultant,abdul.hafezi@freemanharris.co.uk,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+487,Hah Tv Network,Haha,,Hahah,Hahah,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+201,Credit Suisse,Poonam,,Chopra,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+42,Selfemployed,Ac Garage Doors Ltd,,Leeds,Garage Door Installer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+222,Bnp Paribas,Ruth,,Wallington Wk,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+236,Lingtons,Jason,,Peterson,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+327,Aa Computers,Aa,,Computers,Computer Repairs,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Data & Analytics,False
+378,Pure Parties,Aa,,C,Account Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Too short,True,,Sales,False
+386,Social Housing Finance Corporation,Aa,,Gg,Construction Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+299,Nhs,Fredba,,Marks,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+279,"Truebridge Resources, A North Highland Company",Chloe,,Lopez,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+479,Rich Management,Rich,,Management,Management,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+96,The Gentleman Barbers,The Gentleman Ltd,,Barbers,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+30,Arctic Basecamp,James Antarctic Meltdown,,Grecian,Scientist In Residence,james.grecian@durham.ac.uk,99.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+486,Purepackage,Dietdelivered,,Dietdelivered,Dietdelivered,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+406,Buddy La Brador,Buddy,,Buster,Buster,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+306,Suva Developments,A A,,Bennett,Business Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+397,Dda,Aa,,Sada,DA,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Too short,Admin,False
+179,Chelsea Football Club,Deddy,,Ichal,Chelsea,deddy.ichal@chelseafc.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Education,False
+200,Webgineering,Hometyres,,Northwest,Tyres,hometyres.northwest@hardyfinch.co.uk,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+142,Flintshire County Council,Karen,,Antrobus,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+92,Subsee Services Ltd,Subsee Services Ltd,,Subsee Services,Subsee Services,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+437,Seasons Events And Bar,Seasons,,Events And Bar,Events And Bar,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+310,Aa Thornton,A A,,Thornton,Marketing Assistant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Marketing,False
+202,Asos,Hannah,,Williamson,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+337,Media Production,Aa,,Pictures,A And A Pictures,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+321,Sue Ryder,A A,,Ben Tsk,Digital Media Consultant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+213,Egg,Eva,,Toth,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+177,Chelsea Football Club,Dom,,Chen,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+140,Glf,Stuart,,Shanks,Debt Collection,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+347,Szerelmey - Restoration And Stonework Since 1855,Aa,,Ady,Constructii,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+264,Conceptsworld Limited,Ada,,Pat,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+474,St. Roue Ltd,Saint,,Roue,Roue,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+284,Centrica,Stewart,,Griffiths,BA,stewart.griffiths@centrica.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+69,Medireach Ltd,Medireach Ltd,,London,Travel Health Services,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+21,Abr Contractors Ltd,Abr Contractors Ltd,,Raymond,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+413,Mobincom,Mobincom,,Telecom Group,Telecom Group,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+372,Mco,Aa,,Aza,Mcdonalds,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+77,Fairways2Play Ltd,Fairways2play Ltd,,Wwwfairways2playcouk,Director,,,None,True,,,Missing,,Missing,False,Contains numbers,,Missing,False,Contains numbers,True,,Leadership,False
+255,Nat,Sunita,,P,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,False,Too short,False,Too short,Education,False
+127,Wescot,Lewis,,Barr,Debt Collection,lewis.barr@wescot.co.uk,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+208,Firms Connect,Funmi,,Jane,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+107,Herbalife An Independent Distributor,Herbalife Steve Hemi,,Hemingway,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+226,E18 8Uh,Paul,,Gilbert,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+94,Hope For Future Care,Managing Director At Hope For Future Care Ltd,,Northampton,Registered Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+17,Add Construction Services Limited,Add Construction Services Ltd,,Construction,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+305,Bpif (British Printing Industries Federation),A A,,Reeve,Editor,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+249,Analysis Group,John,,Bello,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+484,Aaaaa,Aaaaa,,Aaaaa,Aaaaa,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+144,Gne,Alice,,Samuelson,Debt Collection,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+158,Director Of Customer Engagements,Adam,,Summers,Eq Technologic,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+171,Unknown Company,brookmypoolswimcouk,,,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,False,Invalid job title,Admin,False
+256,Ihs,Mark,,Lewis,Ba,mark.lewis@ihsmarkit.com,60.0,None,False,Too short,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+312,Chartered Certified Accountants,A A,,Osman,Accountant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Finance,False
+294,Na,Mathew,,Puthan,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+147,Moneyplus Group Ltd,Shaun,,Bennett,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+149,Wdrs Limited,Matt,,Alam,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+97,Business Health Hub,Businesshealthhubltd,,,Business Owner,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+109,Herbalife,Lewis,,Kirk,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+115,Herbalife,Shona,,Mcconnell,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+197,Tech Tyre,Gary,,Lee,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+319,Anglo Corporate Law Firm,A A,,Ademola,Director Of Finance And Operations,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Finance,False
+195,National Tyres And Autocare,Alan,,Mainwaring,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+123,Herbalife,Zujey,,Palacios,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+148,Direct Recovery Associates,Direct Recovery,,Associates paul,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+211,L'Oreal,Alice,,Bowen,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+50,Skillz School Ltd,Skillz School Ltd,,Jordan Armstrong,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+86,Opal Fabrication Ltd,Opal Fabrication Ltd,,Gravesend,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+247,Ihs Markit,Pierre,,A,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,False,Too short,False,Too short,Education,False
+55,Arrow Imaging Ltd,Arrow Imaging Ltd,,,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+278,Barclays Investment Bank,Data,,Analytics,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+293,Coop Financial Services,Lisa,,Blanc,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+434,Plus Shops,Hayley Obrien,,Facilities Manager,Facilities Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+232,Edf Energy,Shan,,R,BA,,,None,True,,,Missing,,Missing,True,,,Missing,False,Too short,False,Too short,Education,False
+38,Nes (Gb) Ltd.,Nes gb Ltd,,Alan Sumpter,Company Director And High Voltage Electrical Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Engineering & Development,False
+165,Sms,Mama,,Nez,Abstract,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+28,Bella Aesthetic Health Ltd,Bella Ltd,,Nurse,Health And Beauty,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+90,Television And Radio Techniques,Trt Ltd,,Sheffstudio,Inspiring People To Communicate With Passion,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+207,Bank,Karolina,,Sztanka,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+371,Tkmaxx,Aa,,Sss,Warehouse,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+15,Technical Plastic Solutions,Tps Ltd,,Tech Plas Solutions,Project Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+317,Ymca Central Herts,A A,,Ashraf,Night Support Worker,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Customer Support,False
+189,Staflline,Jozef,,Bado,2 Sisters,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+346,Aair,Aa,,Ir,Director,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+296,Cpw,Katen,,Chan,Ba,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+70,Abh Reinstating Ltd,Asa Abh Ltd,,Henderson,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+466,Dude Plc,Rock,,Dude,Dude,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+112,Herbalife Nutrition,Harpreet,,Kaur,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+143,Herts & Essex Debt Collection,Ken,,Franklin,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+41,Gastro Pubs Ltd,Gastro Pubs Ltd,,Stephen,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+75,Ajt Engineering,Ajt Engineering Ltd,,Site Services Division,Site Services,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+1,Ballers Only London Ltd,Ballers Only London Ltd Sports Management,,Ballers Only Creative Innovation Modelling Agency,Sports Management Agency,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+155,Unknown Company,Gavin,,,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+491,Toys For Bob,Harry,,Bob,BOB,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+2,Winvic Construction Ltd,Sherwin Civil Engineering Ltd,,Chris Sherwin,Freelance Project Management And Civil Engineering Consultant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+72,Titan Pneumatic Ltd,Tp Fluid Power Ltd,,Clegg,Suppliers Of Pneumatic And Fluid Power Products,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+481,Ertyertyerty,Ertyertyerty,,Ertyerterty,Ertyerterty,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+118,Herbalife,Silvia,,Gonzalez,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+181,Chelsea Football Club,Stavros,,Nikolaou,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+223,Emerald,Ania,,Kaminska,BA,ania.kaminska@emeraldgrouppublishing.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+100,Self-Employed,A6 Bodyshop Ltd,,,Director,,,None,True,,,Missing,,Missing,False,Contains numbers,,Missing,,Missing,True,,Leadership,False
+455,Wmp,Jo,,Dancer,Dancer,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+178,Chelsea Football Club,Mustafa,,Osman,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+227,Consultancy,Jenny,,Graves,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+428,Hcone,Overdene,,Deputy Manager,Deputy Manager,overdene.deputymanager@hc-one.co.uk,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Leadership,False
+435,Skylight Windows Ltd,Skylight,,Windows,Windows,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+271,Barista,Mozak,,Uipol,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+242,Pc World Business,Chris,,Clifford,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+388,Path,Aa,,Es,Path,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Invalid job title,Education,False
+354,Allure Aviation,Aa,,Hh,DD,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Too short,Admin,False
+268,British Airways Plc,Baljit,,Dhillon,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+263,National Australia Group,Gayle,,Shatford,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+265,Csfb,Todd,,Brown,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+395,Invergo,Aa,,Aaaaa,Analyst,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Data & Analytics,False
+103,Elearn,Gordon,,Bennett,121 Tuition,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+252,Thomson Financial,James,,Thompson,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+52,Dllogistics,Dl Logistics Ltd,,,Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+318,A-A Quality Care Ltd,A A,,Quality Care,Recruitment,a.care@a-a-qualitycare.co.uk,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+322,Aah Pharmaceuticals Ltd,A A,,Aah,AAH,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+292,Selfemployed,Iain,,Smith,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+157,1848,Wayne,,Lawrence,1848 Ltd,,,None,False,Only numbers,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+36,Kbi Ltd,Kbi Ltd,,Karl Botha,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+358,Tea Collection,Aa,,Godu,History Teacher,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+349,Unknown Company,Aa,,Amin,N/a,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Invalid characters,Admin,False
+332,Sky,Aa,,Smith,CSC,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+218,Fidelity,Michael,,Ginokon,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+170,Pharmazondirect,Pharmazon,,Direct,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+311,Self,A A,,Sutherland,Iot Communications,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+215,Hn,Emma,,Anderson,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+63,Italtourism Ltd.,Italtourism Ltd,,Piero,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+49,Tomily Supplies Ltd,Tomily Supplies Ltd,,Sewell,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+498,Selfemployed,Southwest,,Shrinkwrap,Shrinkwrap,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Human Resources,False
+14,Dl Facades Ltd,Dlfacades Ltd,,David Lewis,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+126,Herbalife,Harjit,,Sanghera,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+128,Eos Solutions Uk Plc,Michelle,,Ohare,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+98,Selfemployed,Off Grid Excavations Ltd,,Dixon,Civil Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+48,Supreme Surfacing Limited,Supreme Surfacing Ltd,,John Statham,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+366,Lancer Orthodontics,Aa,,Aaa,Tester,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Invalid job title,Engineering & Development,False
+295,Hbos,Lesley-ann,,Pierce,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+304,Bogate Ltd,A A,,Galat,Chief Commercial Officer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+20,Gru Transport Ltd,Gru Transport Ltd,,,Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+307,Skyineye Ltd,A A,,Faruki,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+426,Pjc Groundworks & Civils,Pjc,,Groundworks,Groundworks,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+417,Jon,Jon,,Veere,Veere,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+4,Rem Roc Products Ltd,Rem Roc Products Ltd,,,Sales Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Sales,False
+192,Tyres,Thomas,,Southerton,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+280,New Experience Holidays,Brian,,Hubble,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+393,Freelance,Aa,,Assd,Freelance,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+420,Hv&A Solicitors,Hv&a,,Solicitors,Solicitors,,,None,True,,,Missing,,Missing,False,Invalid characters,,Missing,True,,True,,Legal,False
+385,The Contact Company,Aa,,Ali,Customer Service Representative,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Customer Support,False
+246,Dorset County Council,B,,Dare,Ba,,,None,True,,,Missing,,Missing,False,Too short,,Missing,True,,False,Too short,Education,False
+45,Pipingmechengltd,Pipingmechengltd,,,Piping Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Engineering & Development,False
+277,Infosys,My,,Oracle,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+316,Alpha Cars,A A,,Baker,Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+472,Bob The Builder,Bob,,Builder,Builder,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+162,Asb Law Llp,Sam,,Smith,First Impressions,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+239,Prison Service,John,,Walton,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+238,Fjhd,Leah,,Davies,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+169,Chambers And Partners,Macduff,,Madiba,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+477,Test,Cdsm-james,,Tester,Tester,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Engineering & Development,False
+408,Npp Research,Npp,,Research,Research,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+237,Bbc Worldwide,Olive,,Taylor,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+433,Crown Golf,Eccleston Park,,Golf Club,Golf Club,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+461,Blur Group,Blur,,Test,Test,,,None,True,,,Missing,,Missing,True,,,Missing,False,Dummy value,False,Invalid job title,Admin,False
+315,Consultant,A A,,Orabi,Ahmad Alwaa,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+383,Fhvgfg,Aa,,Aaa,Co-founder,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+88,Tttrade Ltd,Tt Trade Ltd,,Oilpowerline,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+129,Sussex Enterprise,Steve,,Shaw,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+480,"Karl Storz Endoscopyamerica, Inc",Carl,,Karl,Karl,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+460,The Secret Brolly Man,Secret,,Brolly Man,Brolly Man,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+54,Self-Employed,The Bespoke Metal Workshop Ltd,,Ersan Dogan,Master Metal Worker,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+146,Burton Bailiffs Ltd,Jordan,,Horlock,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+10,A&Rs Solutions Ltd,A And Rs Solutions Ltd,,,Chief Executive Officer,emily.mcdonnell@virgin.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,,Missing,True,,Admin,False
+269,Royal Bank Of Scotland,Beata,,Halas,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+187,Aesseal,Ashley,,Dower,Aesseal,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+27,Surclean Systems Ltd,Sur-clean Systemsltd,,Manchester Pressure Washers,Company Secretary,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+431,Posh Cleaning,Posh,,Cleaning,Cleaning,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+401,Global Centre Of Islamic Art,Global Centre Of,,islamic art,Islamic Art,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+125,Herbalife Nutrition,Tessa,,Bond,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+139,Na,John,,Briers,Debt Collection,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+376,Heart Of England Nhs Foundation Trust,Aa,,Faizal,Consultant Rheumatologist,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+104,121 Etuition,May,,Blake,121 Tuition,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+219,Bbb Architects Toronto Inc,John,,Awpji,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+462,"King Edward'S School, Surrey",Missis Graves,,Matron,Matron,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+135,United Utilities,Chris,,Scott,Debt Collection,chris.scott@unitedutilities.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+500,Indipendent,Lee,,Dj,DJ,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Production,False
+198,Lure De Car,Ionut,,Neda,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+457,Ezbinary,Ezbinary,,Affiliates,Affiliates,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+85,Ipmcltd,Ipmcltd,,Ipmcltd,Ipmcltd,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+194,Southcoast Tyres,Dean,,Bampton,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+166,Speedy Essay,Speedy Essay,,Uk,Assignment Writers,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+205,Gd,George,,Dranom,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+495,Imagine Publishing,Digital Photographer,,Magazine,Magazine,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+99,Mersey Engineering Construction Ltd,Mersey Engineering Construction Ltd,,,Sales,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Sales,False
+87,The Job Office Ltd,The Job Office Ltd,,Jamie Rafferty,Rec 2 Rec,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+18,Go2Shine Cleaning Services Ltd,Go2shine Cleaning Services Ltd,,James Owen,Managing Director,enquiries@go2shine.com,90.0,None,True,,True,,False,Invalid format,False,Contains numbers,,Missing,True,,True,,Leadership,False
+342,Al,Aa,,Bb,King,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+173,Unknown Company,Rosemary,,McAndrew,Contact Us,rmcandrew@savills.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Invalid job title,Admin,False
+331,Dssdtraducciones,Aa,,Aa,FDF,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+40,Cartec Graphics Ltd,Cartec Graphicsltd,,Design Print Sign Manufacture,Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+183,Chelsea,Mariana,,Ferreira,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+303,Litfield House,A A,,Orabi,Otolaryngologist,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+116,Herbalife Nutrition,Angela,,Legeckis,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+336,Platinum Bay Group,Aa,,Dd,Global Sales Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Sales,False
+257,Maersk Line,David,,Bradston,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+91,Mi Workwear Ltd,Mi Workwear Ltd,,,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+357,Qwerty,Aa,,Ccc,Aaaa,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+485,Burnley Auctioneers,Burnley,,Auctioneers,Auctioneers,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+7,Hallam Heating Limited,Hallam Heating Ltd,,,Director / Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,False,Invalid characters,Engineering & Development,False
+379,Adidas,Aa,,Aa,Business Professional,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+12,Ck Blinds Ltd,Ck Blinds Ltd,,Hockley,Sales Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+203,Capita,Techil,,Aev,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+396,Diebold Nixdorf,Aa,,Dgd,Information Technology Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+390,Selfemployed,Aa,,Party Wall Surveyors,Party Wall Surveyor,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+132,Solicilinks,Lewis,,Sargeant,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+283,British Airways Pensions,Hannah,,Cook,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+334,Aa Line Markings,Aa,,Line Markings,Surplus Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+421,Xaxis,Xaxis Uk,,Operations,Operations,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+314,Powerpartners,A A,,Drury,Partnership Development Executive,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+151,Hm Revenue & Customs,Hazel,,Arnott,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+31,Inside Out Builders Ltd,Inside Out Builders Ltd,,Because We Care,Director Joe Smith,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+47,Self Employed Mechanical Engineer,Brk Eng Ltd,,Craig Birkinshaw,Mechanical Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+102,Pegasus Group,Joe,,Kirtley,Pegasus Group,joe.kirtley@dppukltd.com,99.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+167,Want To Know More,Isle Rent,,A Room,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+459,Recuiter,Recuiter,,Recuiter,Recuiter,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+138,Lowell Group,Nadeem,,Khan,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+351,Asdfdfdfd,Aa,,Bb,BB,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,False,Too short,Admin,False
+79,Commercial Metal Spinners Ltd,Cms Ltd,,Metal Spinners,Metal Spinners,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+60,"G4E Ltd, Grid For Electric Vehicles",G4eltd,,Grid For Electric Vehicles,Managing Director,,,None,True,,,Missing,,Missing,False,Contains numbers,,Missing,True,,True,,Leadership,False
+400,Marco Pierre White Steakhouse And Grill Newcastle,Aa,,Bb,Chef,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+111,Herbalife,Mayra,,Almeida,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+204,Dog Digital,Km,,Test,BA,,,None,True,,,Missing,,Missing,True,,,Missing,False,Dummy value,False,Too short,Education,False
+430,Blahblah Catering,Blahblah,,Catering,Catering,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+260,Aspects Beauty,Elaine,,Dwyer,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+233,Booker Group,Neil,,Chambers,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+483,Mmm,Ciprian Prodan,,Antreprenor,Antreprenor,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+445,Always Building,Wayne,,Builder,Builder,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+134,Lc Receivables,Bob,,Williamson,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+478,Cottage Plum,Plum,,Cottage,Cottage,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+137,Claims4U,Franklin,,Chukwumah,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+16,P R Tiling Ltd,P R Tiling Ltd,,,Director,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Leadership,False
+416,H&M,Alex,,Bricklayer,Bricklayer,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+442,Freelance,Mex,,Translator,Translator,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+161,Whitfield Business Support,Emma,,Smith,First Impressions,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+84,L'Emporio Ltd T/A L'Emporio Fine Foods,Lemporio Ltd,,Ta Lemporio Fine Foods,L' Emporio Fine Foods,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+301,Vital Link Europe Ltd,A A,,Sheikh,Senior Software Architect,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+231,Hsbc,Matthew,,Day,Ba,matthew.day@hsbc.com,99.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+175,Nhc,Mia,,Monta,Chelsea,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+230,Rbs,Dhruv,,Singh,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+468,Berkley Farm,Berkley,,Farm,Farm,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+374,A.A Simpson Engineering Solutions,Aa,,Simpson,A.a Simpson Engineering Solutions,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Engineering & Development,False
+446,Sentimental Hr,Sentimental,,Hr,HR,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Human Resources,False
+488,Bsg Solicitors,Bsg,,Solicitors,Solicitors,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Legal,False
+66,Broadclick Ltd,B061 Broadclick Ltd,,Imran Noor,Director,,,None,True,,,Missing,,Missing,False,Contains numbers,,Missing,True,,True,,Leadership,False
+101,Kash,Salem,,Aloshaysh,Kash,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+464,Wilson & Co Accountancy Ltd,Wilson Co,,Administrator,Administrator,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+286,Nhs Direct,Paul,,Coates,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+290,Bank Of Scotland,Sally,,Collie,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+326,Brighttalk,A A,,Mackaness,Finance Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Finance,False
+412,Bbc Worldwide,Test,,Tester,Tester,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,False,Invalid job title,Engineering & Development,False
+424,Jems Property Services,Jems,,Property Services,Property Services,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+234,Ebix,Ba Team,,Europe,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+71,Edegtrix,Edgetrix uk Ltd,,Solutions,Senior Project Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+297,Hjbds,Aisha,,Aziz,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+282,Hw,Dong,,Hao,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+274,And Company,Darshan,,Satghare,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+465,Dunkeld And Birnam Golf Club,Dunkeld And Birnam,,Golf Club,Golf Club,dunkeldgolf@outlook.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Invalid job title,Admin,False
+235,Eds,John,,Anderson,BA,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+253,Centrica,Alia,,Jalil,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+341,Nmg & Son Ltd,Aa,,Anna,Part-time Office Worker,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+46,Point Masonry Ltd,Point Masonry Ltd,,,Stonemason,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+81,Ventola Projects Limited,Ventola Projects Ltd,,Mick Ventola,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+415,General Medical Council,Gmc,,Social Media,Social Media,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+193,Buy Tyres,Buy,,Tyres,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+6,Court Homes Limited,Court Homes Ltd,,Brian Hayhurst,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+287,Booker Wholesale,Lu,,Marelli,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+160,Williams Lea,Rosie,,Sanders,First Impressions,rosie.sanders@williamslea.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+105,Im Supply,Reza,,Amirreza,Shopping Cart,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+419,Evil Spawn,Andy,,Pro,PRO,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+145,Currently Seeking Opportunities,Althea,,Stewart,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+228,Government,David,,Knight,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+359,Coventry Uniiversity,Aa,,Dd,Lab Engineer,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Engineering & Development,False
+363,Rush,Aa,,Calva,Hairdresser,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Data & Analytics,False
+240,Monster Worldwide,Avery,,Jenkins,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+163,Boodle Hatfield Llp,Victoria,,Jeffers Hartley,First Impressions,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+136,Iqor Uk,Ebrahim,,Nakhuda,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+353,Northumbria Police,Aa,,Sharon,Police Officer,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+56,Charlotte Lilford,Cecilietteltd,,Maddalena,Senior Architect And Interior Design,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+117,Herbalife,Rob,,Lomax,Herbalife,robl@herbalife.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Sales,False
+141,Grosvenor Legal Services,Claire Turton,,Turton,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+275,Barclays Wealth,Stewart,,Deeks,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+190,2 Sisters Food Group,Stephen,,Bennett,2 Sisters,stephen.bennett@2sfg.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+24,Road Solutions Uk Ltd,Roadsolutionsukltd,,Azhar Hussain,MD,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Leadership,False
+254,Sungard,Chris,,Wall,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+444,Frm,Huzeifa,,Diy,Diy,,,None,False,Too short,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+80,Roe Engineering Ltd,Roe Engineering Ltd,,Neill,Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+25,Eastern Plant Machinery Ltd,Eastern Plant Machinery Ltd,,,Used Plant Machinery Sales,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Sales,False
+325,Clinic,A A,,Khallaf,Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+93,Mini Maid Ltd,Mini Maid Ltd,,Managing Director,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+439,R J Plumbing,Richy,,Plumber,Plumber,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+191,Abbott,Lloyd,,Stamp,2 Sisters,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+130,Ccscollect,Ccs,,Collect,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+185,Deborah John Glass Art,Deborah,,John,Covent Garden,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Operations,False
+323,Justice British Designer Jewellery,A A,,Lu Enec,Lawyer,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+451,Lawrence Sheriff School,Lawrence Sheriff,,School,School,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Education,False
+402,Royalmail,Peter,,Postman,Postman,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+196,Fast Fit Tyres Limited,Dumitru,,Suditu,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+425,Self-Employeed,Lex,,Dj,DJ,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Production,False
+34,Pharmacy,My Remedy Ltd,,,Pharmacy Specialist,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+29,Premier Construction Training Ltd,Pct Ltd,,For All Your Training Needs,Health And Safety Specialist,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+153,International Personal Finance Plc,Nikolett,,Trombit S,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+108,Herbalife,William,,Mcloughlin,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+463,Happy Days Nursery,Happy Days,,Nursery,Nursery,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Medical,False
+373,Stm Group Plc,Aa,,Bb,Security Officer,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+152,Orange,Rachael,,Turner,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+497,The Bar Standards Board,Qa,,Apprentice,Apprentice,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+456,Jp Training,Jp - Tcha,,Training,Training,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Data & Analytics,False
+440,Moo,Moo,,Cow,Cow,moo@moo.com,90.0,None,False,Too short,True,,False,Invalid format,True,,,Missing,True,,True,,Admin,False
+387,No,Aa,,Alk,General Dentist,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+276,Star,Aryan,,Mathur,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+272,Lch Direct,Toks,,Bola,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+329,Nhs,Aa,,Ss,Title,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+76,Burnsplasteringltdyahoo,Burns Plastering Ltd,,John,Plastering,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+65,Ups Scs (Uk) Ltd,Gla Ups Scs uk Ltd,,Mcconnell,Export Supervisor,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+452,Kaya Band Official,Kaya,,Band,Band,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Production,False
+340,Sd,Aa,,Dfff,SAS,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+422,Self Employed,Charlie,,Painter,Painter,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Engineering & Development,False
+95,G & V Commerce Uk Ltd,Gvcommerce Uk Ltd,,Giuditta Morello,REP,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+44,Worcester Autos Ltd,Worcester Autos Ltd,,Ray Middleton Garage,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+449,Holte End Blogger,Holte End,,Blogger,Blogger,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+59,Liverpool Famous Walking Tours Ltd,Liverpool Famous Walking Tours Ltd,,,Tour Operator,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+339,Astrophysics Inc,Aa,,Sw,Astrophysicist,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+39,Ipitechuk Ltd,Ipitechuk Ltd,,Ipi Tech Uk,Security Manager,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+168,Silver Atena Limited,Silver,,Atena,Contact Us,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+262,Pgs,Kim,,Stevenson,BA,kim@pgs.com,60.0,None,False,Too short,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+164,Artist And Designer,Denny,,Mcallister,Abstract,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+361,Fab Oil And Gas,Aa,,Mazrei,Executive Director,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+244,Qbit Systems,Ashish,,Jain,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+429,Promsvyaznedvizhimost,Dayana,,Dayana,Dayana,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+258,Proclaim Marketing,Ernie,,Sakarombe,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+350,J Clement Ltd,Aa,,Ogunyemi,CEO,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Leadership,False
+120,Freelance,Lisa,,Gr,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+338,Uczniowski Klub Sportowy Shikon Odz,Aa,,Qq,Eeee,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+324,Phd Media,A A,,Erangika,Media Planner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+243,Nafreelance,Tom,,Rainsford,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+182,Chelsea Football Club,Etibar,,Bagirzade,Chelsea,etibar.bagirzade@chelseafc.com,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Education,False
+360,Millennium & Copthorne Hotels,Aa,,Jw,Receptionist,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+35,Northwood Building:Groundworks Ltd,Northwood Ltd,,Fitzgerald,Builder,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+476,Just Retirement,Testing,,User,User,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+220,Blackrock,Gurpreet,,Nagra,BA,gurpreet.nagra@blackrock.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+5,Partyard Ltd,Partyardltd,,Ryan,Director Of Special Events,partyardltd.ryan@partyard.pt,60.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Leadership,False
+150,Brexit,Jonathan,,Deal,Debt Collection,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+188,H&H,G,,Mehat,H And H,,,None,False,Too short,,Missing,,Missing,False,Too short,,Missing,True,,True,,Admin,False
+267,Telefonica Uk,Jim,,Wentworth,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+251,"Dept Of Innovation, University And Skills",Atha,,Elahi,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+43,Rp Complete Building Services Ltd,Rpcbs Ltd,,Robert Paisey,Managing Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+380,A&A Pictures Ltd,Aa,,Pictures,Media Production Specialist,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+119,Herbalife,Agnieszka,,Dachnowicz,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+298,Espeed,Mona,,Patel,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+362,Hall Construction Services Limited,Aa,,Limted,Area Operations Manager,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Operations,False
+121,Herbalife,Lisa,,Fear,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Sales,False
+356,Cleaning,Aa,,Bb,Cleaner,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,False,Dummy value,True,,Admin,False
+199,Heads Reqruitment,Michael,,Ogden,Tyres,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+418,The Pirate Society,The,,Captain,Captain,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Data & Analytics,False
+19,Commercial Door Maintenance,Commercial Door Maintenance Services Ltd,,,Engineer,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Engineering & Development,False
+333,Royal Mail,Aa,,Venners,Postman,,,None,True,,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+470,A Stroke Of Luck,Rowlf,,Ambassadog,Ambassadog,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+248,L&T Infotech,Venkateswara,,Thurpunati,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+453,Barchester Healthcare,Tennyson Wharf,,Care Home,Care Home,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+33,Original Construction,Vasltd,,,Construction,,,None,True,,,Missing,,Missing,True,,,Missing,,Missing,True,,Admin,False
+74,Aellbuilders,Aell Builders Ltd,,Allan Grant,Builder And Carpenter,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+405,Ukmedia,Uk,,Media,Media,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+210,Bae Systems,Jake,,Hutch,Ba,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+229,Ordnance Survey,Karen,,Jackson,BA,karen.jackson@os.uk,99.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,False,Too short,Education,False
+308,Warrenview Ltd,A A,,Karen,Director,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+432,Home Improvements And Maintenance Limited,Home Improve,,Construction,Construction,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+285,Benefit,Jordan,,Clarke,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+113,Herbalife,Kirsty L,,L,Herbalife,,,None,True,,,Missing,,Missing,True,,,Missing,False,Too short,True,,Sales,False
+458,Spartherm Feuerungstechnik Gmbh,Witold,,Swierzko,Swierzko,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Admin,False
+176,Chelsea Football Club,Thomas,,Reed,Chelsea,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Education,False
+448,Ix Rental,Ix,,Director,Director,info@ixrental.com,90.0,None,True,,True,,False,Invalid format,True,,,Missing,True,,True,,Leadership,False
+217,Encore Tickets Ltd,Michael,,Glatthorn,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+214,Nationsl Australia Bank,Julie,,Philp,BA,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Too short,Education,False
+51,Selfemployed,Ape Solutions Ltd,,Undefined,Business Owner,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Leadership,False
+343,Non,Aa,,Cola,Chef,,,None,False,Too short,,Missing,,Missing,False,Dummy value,,Missing,True,,True,,Admin,False
+493,Testing,Testing,,Testing,Testing,,,None,True,,,Missing,,Missing,True,,,Missing,True,,False,Invalid job title,Admin,False
+467,Choudry Associates,Khalid,,Accountant,Accountant,,,None,True,,,Missing,,Missing,True,,,Missing,True,,True,,Finance,False

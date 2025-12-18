@@ -69,7 +69,9 @@ def process_file():
 
         # 4. Save Cleaned File
         directory, filename = os.path.split(filepath)
-        processed_filename = f"clean_{filename}"
+        # Strip original extension and force .csv
+        base_name = os.path.splitext(filename)[0]
+        processed_filename = f"clean_{base_name}.csv"
         processed_path = os.path.join(directory, processed_filename)
         
         cleaned_df.to_csv(processed_path, index=False)

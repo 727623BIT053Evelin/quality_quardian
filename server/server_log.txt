@@ -1,0 +1,7 @@
+
+> server@1.0.0 dev
+> node index.js
+
+🚀 Node API Server running on port 4000
+👉 API Usage: http://localhost:4000/api
+✅ MongoDB Connected

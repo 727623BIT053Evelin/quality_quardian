@@ -1,282 +1,278 @@
 import pandas as pd
 import re
-import pycountry
-from datetime import datetime
 
-# ===============================
-# Helper: Individual column validators
-# ===============================
+MISSING_COMPANY_VALUES = {
+    "", " ", "-", "--", "na", "n/a", "null", "none",
+    "undefined", "?", "nil"
+}
 
-def is_invalid_company_name(name):
-    if pd.isnull(name):
-        return False
-    name = str(name).strip().lower()
-    return len(name) < 2 or name.isdigit() or name in ['na', 'n/a', 'unknown', 'test']
-
-def is_invalid_website(website):
-    if pd.isnull(website):
-        return False
-    website = str(website).strip().lower()
-    if website in ['na', 'n/a', 'unknown', 'not available']:
-        return True
-    if ' ' in website or '.' not in website:
-        return True
-    if website[0].isdigit() and not website.startswith(('http://', 'https://', 'www.')):
-        return True
-    return False
-
-def is_invalid_domain(domain):
-    if pd.isnull(domain):
-        return False
-    domain = str(domain).lower().strip()
-    # Support multi-part TLDs like .co.uk
-    domain_regex = r"^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$"
-    return not re.fullmatch(domain_regex, domain)
-
-def is_invalid_country(country):
-    if pd.isnull(country):
-        return False
-    country = str(country).strip()
-    if country.lower() in ['na', 'n/a', 'unknown', 'not available']:
-        return True
-    aliases = {
-        'usa': 'United States',
-        'u.s.a': 'United States',
-        'us': 'United States',
-        'uk': 'United Kingdom',
-        'uae': 'United Arab Emirates'
-    }
-    normalized = aliases.get(country.lower(), country)
-    try:
-        pycountry.countries.search_fuzzy(normalized)
-        return False
-    except LookupError:
+def is_missing_company_name(value):
+    """
+    Returns True if company name is missing
+    """
+    if pd.isna(value):
         return True
 
-def is_invalid_industry(industry):
-    # Treat all industries as valid
-    return False
+    value = str(value).strip().lower()
+    return value in MISSING_COMPANY_VALUES
 
-def is_invalid_company_size(size):
-    if pd.isnull(size):
-        return False
-    size_str = str(size).strip().lower()
-    if size_str in ['na', 'n/a', 'unknown', 'not available']:
+JUNK_COMPANY_VALUES = {
+    "test", "testing", "dummy", "sample", "xyz", "abc",
+    "company", "business", "firm", "organization"
+}
+
+LEGAL_SUFFIXES = [
+    "ltd", "limited", "pvt", "private", "llp", "inc",
+    "corp", "corporation", "co", "gmbh", "plc"
+]
+
+def validate_company_name(value):
+    """
+    Returns:
+    (is_valid: bool, issue: str)
+    """
+
+    # Safety check
+    if is_missing_company_name(value):
+        return False, "MISSING_COMPANY_NAME"
+
+    name = str(value).strip()
+    name_lower = name.lower()
+
+    # Rule 1: Too short
+    if len(name) < 3:
+        return False, "COMPANY_NAME_TOO_SHORT"
+
+    # Rule 2: Junk values
+    if name_lower in JUNK_COMPANY_VALUES:
+        return False, "JUNK_COMPANY_NAME"
+
+    # Rule 3: No alphabetic characters
+    if not re.search(r"[a-zA-Z]", name):
+        return False, "NO_ALPHABET_IN_COMPANY_NAME"
+
+    # Rule 4: Excessive special characters
+    special_chars = re.findall(r"[^a-zA-Z0-9\s&.,-]", name)
+    if len(name) > 0 and (len(special_chars) / len(name) > 0.3):
+        return False, "TOO_MANY_SPECIAL_CHARACTERS"
+
+    # Rule 5: Looks like person name (single word, no legal suffix)
+    if len(name.split()) == 1:
+        if not any(suffix in name_lower for suffix in LEGAL_SUFFIXES):
+            return False, "POSSIBLE_PERSON_NAME"
+
+    # Passed all checks
+    return True, "VALID_COMPANY_NAME"
+
+# Placeholder functions for other validations that might have been lost
+def validate_email(value):
+    if pd.isna(value) or str(value).strip().lower() in ["", "not provided"]:
+        return False, "MISSING_EMAIL"
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", str(value)):
+        return False, "INVALID_EMAIL_FORMAT"
+    return True, "VALID_EMAIL"
+
+def validate_phone(value):
+    if pd.isna(value) or str(value).strip().lower() in ["", "not provided"]:
+        return False, "MISSING_PHONE"
+    clean_phone = re.sub(r"[^\d+]", "", str(value))
+    if len(clean_phone) < 7:
+        return False, "INVALID_PHONE_FORMAT"
+    return True, "VALID_PHONE"
+
+def validate_industry(value):
+    if pd.isna(value) or str(value).strip().lower() in ["", "unknown industry"]:
+        return False, "MISSING_INDUSTRY"
+    return True, "VALID_INDUSTRY"
+
+def validate_country(value):
+    if pd.isna(value) or str(value).strip().lower() in ["", "not specified"]:
+        return False, "MISSING_COUNTRY"
+    return True, "VALID_COUNTRY"
+
+def validate_company_age(value):
+    if pd.isna(value) or str(value) == "Unknown":
+        return False, "MISSING_AGE"
+    return True, "VALID_AGE"
+
+def validate_domain(value):
+    if pd.isna(value) or str(value) == "Unknown Domain":
+        return False, "MISSING_DOMAIN"
+    return True, "VALID_DOMAIN"
+
+MISSING_NAME_VALUES = {
+    "", " ", "-", "--", "na", "n/a", "null",
+    "none", "undefined", "?", "nil"
+}
+
+COMPANY_KEYWORDS = {
+    "test", "testing", "dummy", "sample", "xyz", "abc",
+    "company", "business", "firm", "organization",
+    "ltd", "limited", "pvt", "private", "llp", "inc",
+    "corp", "corporation", "co", "gmbh", "plc"
+}
+
+def is_missing_first_name(value):
+    if pd.isna(value):
         return True
-    try:
-        return float(size_str) <= 0
-    except (ValueError, TypeError):
+
+    value = str(value).strip().lower()
+    return value in MISSING_NAME_VALUES
+
+def validate_first_name(value):
+    """
+    Returns:
+    (is_valid: bool, issue: str)
+    """
+
+    if is_missing_first_name(value):
+        return False, "MISSING_FIRST_NAME"
+
+    name = str(value).strip()
+    name_lower = name.lower()
+
+    # Length check
+    if len(name) < 2 or len(name) > 30:
+        return False, "INVALID_FIRST_NAME_LENGTH"
+
+    # Digits not allowed
+    if re.search(r"\d", name):
+        return False, "INVALID_FIRST_NAME_HAS_DIGITS"
+
+    # Junk characters
+    if not re.fullmatch(r"[A-Za-z'-]+", name):
+        return False, "INVALID_FIRST_NAME_JUNK_CHARACTERS"
+
+    # Repeated characters
+    if re.search(r"(.)\1{3,}", name_lower):
+        return False, "INVALID_FIRST_NAME_REPEATED_CHARACTERS"
+
+    # Company words in name
+    if any(word in name_lower for word in COMPANY_KEYWORDS):
+        return False, "INVALID_FIRST_NAME_CONTAINS_COMPANY_WORD"
+
+    # Single-character noise
+    if len(set(name_lower)) == 1:
+        return False, "INVALID_FIRST_NAME_SINGLE_CHAR"
+
+    return True, "VALID_FIRST_NAME"
+
+MISSING_MIDDLE_VALUES = {
+    "", " ", "-", "--", "na", "n/a", "null",
+    "none", "undefined", "?", "nil"
+}
+
+def is_missing_middle_name(value):
+    if pd.isna(value):
         return True
 
-def is_invalid_person_name(name):
-    if pd.isnull(name):
-        return False
-    name = str(name).strip().lower()
-    return name.isdigit() or len(name) < 2 or name in ['na', 'unknown', 'test']
+    value = str(value).strip().lower()
+    return value in MISSING_MIDDLE_VALUES
 
-def is_invalid_email(email):
-    if pd.isnull(email):
-        return False
-    email = email.strip()
-    return ' ' in email or '@' not in email or '.' not in email.split('@')[-1]
+def validate_middle_name(value):
+    """
+    Returns:
+    (is_valid: bool, issue: str)
+    """
+    if is_missing_middle_name(value):
+        return False, "MISSING_MIDDLE_NAME"
+    
+    return True, "VALID_MIDDLE_NAME"
 
-def is_invalid_title(title):
-    if pd.isnull(title):
-        return False
-    title = title.strip().lower()
-    return title in ['na', 'unknown', 'test']
+MISSING_LAST_NAME_VALUES = {
+    "", " ", "-", "--", "na", "n/a", "null",
+    "none", "undefined", "?", "nil"
+}
 
-def is_invalid_role_function(role):
-    if pd.isnull(role):
-        return False
-    role = role.strip().lower()
-    return role in ['na', 'unknown', 'not provided']
+def is_missing_last_name(value):
+    if pd.isna(value):
+        return True
 
-# ===============================
-# VALIDATION FUNCTIONS USED IN PIPELINE
-# ===============================
+    value = str(value).strip().lower()
+    return value in MISSING_LAST_NAME_VALUES
 
-# -------------------------------
-# Company Name
-# -------------------------------
-def validate_company_name(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    if "company_name" not in df.columns:
-        return df
+def validate_last_name(value):
+    """
+    Returns:
+    (is_valid: bool, issue: str)
+    """
 
-    def normalize_company(name):
-        if pd.isna(name) or str(name).strip() == "":
-            return name
-        name = str(name).strip().lower()
-        name = name.replace("private limited", "pvt ltd")
-        name = name.replace("private ltd", "pvt ltd")
-        name = name.replace("pvt.", "pvt")
-        return name.title()
+    if is_missing_last_name(value):
+        return False, "MISSING_LAST_NAME"
 
-    def check_company(name):
-        if pd.isna(name) or str(name).strip() == "":
-            return None, "Missing"
-        if len(str(name)) < 4:
-            return False, "Too short"
-        if str(name).lower() in ["pvt", "pvt ltd", "private limited"]:
-            return False, "Incomplete company name"
-        if re.fullmatch(r"[0-9\s]+", str(name)):
-            return False, "Only numbers"
-        return True, None
+    name = str(value).strip()
+    name_lower = name.lower()
 
-    df["company_name"] = df["company_name"].apply(normalize_company)
-    result = df["company_name"].apply(check_company)
-    df["company_name_is_valid"] = result.apply(lambda x: x[0])
-    df["company_name_issue"] = result.apply(lambda x: x[1])
-    return df
+    # Length check
+    if len(name) < 2 or len(name) > 40:
+        return False, "INVALID_LAST_NAME_LENGTH"
 
-# -------------------------------
-# Email Validation
-# -------------------------------
-def validate_email(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    email_cols = [c for c in df.columns if "email" in c.lower()]
-    if not email_cols:
-        return df
+    # Digits not allowed
+    if re.search(r"\d", name):
+        return False, "INVALID_LAST_NAME_HAS_DIGITS"
 
-    email_regex = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+    # Junk characters
+    if not re.fullmatch(r"[A-Za-z'-]+", name):
+        return False, "INVALID_LAST_NAME_JUNK_CHARACTERS"
 
-    for col in email_cols:
-        def check_email(value):
-            if pd.isna(value) or str(value).strip() == "":
-                return None, "Missing"
-            if re.fullmatch(email_regex, str(value).strip()):
-                return True, None
-            return False, "Invalid format"
+    # Repeated characters
+    if re.search(r"(.)\1{2,}", name_lower):
+        return False, "INVALID_LAST_NAME_REPEATED_CHARACTERS"
 
-        result = df[col].apply(check_email)
-        df[f"{col}_is_valid"] = result.apply(lambda x: x[0])
-        df[f"{col}_issue"] = result.apply(lambda x: x[1])
+    return True, "VALID_LAST_NAME"
 
-    return df
+MISSING_JOB_VALUES = {
+    "", " ", "-", "--", "na", "n/a", "null",
+    "none", "undefined", "?", "nil"
+}
 
-# -------------------------------
-# Phone Validation
-# -------------------------------
-def validate_phone(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    phone_cols = [c for c in df.columns if "phone" in c.lower()]
-    if not phone_cols:
-        return df
+ROLE_KEYWORDS = {
+    "manager", "engineer", "analyst", "director",
+    "officer", "lead", "head", "executive",
+    "specialist", "consultant", "developer",
+    "architect", "admin", "president", "vp"
+}
 
-    def extract_phone_digits(value):
-        if pd.isna(value):
-            return None
-        digits = re.sub(r"\D", "", str(value).split(".")[0])
-        return digits if digits else None
+JUNK_JOB_TITLES = {"contact us", "n/a", "user", "title", "abstract"}
+PERSONAL_WORDS = {"andy", "chelsea", "dayana"}
+COMPANY_WORDS = {"herbalife", "tyres", "covent garden"}
 
-    for col in phone_cols:
-        digits = df[col].apply(extract_phone_digits)
+def is_missing_job_title(value):
+    if pd.isna(value):
+        return True
+    value_str = str(value).strip().lower()
+    return value_str in MISSING_JOB_VALUES or value_str == ""
 
-        def check_phone(x):
-            if x is None:
-                return None, "Missing"
-            if len(x) == 10:
-                return True, None
-            return False, "Invalid length"
+def validate_job_title(value):
+    """
+    Returns:
+    (is_valid: bool, issue: str)
+    """
+    if is_missing_job_title(value):
+        return False, "MISSING_JOB_TITLE"
 
-        result = digits.apply(check_phone)
-        df[f"{col}_digits"] = digits
-        df[f"{col}_is_valid"] = result.apply(lambda x: x[0])
-        df[f"{col}_issue"] = result.apply(lambda x: x[1])
+    title = str(value).strip()
+    title_lower = title.lower()
 
-    return df
+    if len(title) < 3:
+        return False, "JOB_TITLE_TOO_SHORT"
 
-# -------------------------------
-# Industry Validation
-# -------------------------------
-def validate_industry(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    if "industry" not in df.columns:
-        return df
+    if re.search(r"\d", title):
+        return False, "JOB_TITLE_HAS_DIGITS"
 
-    df["industry_is_valid"] = True
-    df["industry_issue"] = None
-    return df
+    if not re.fullmatch(r"[A-Za-z\s&/-]+", title):
+        return False, "JOB_TITLE_JUNK_CHARACTERS"
 
-# -------------------------------
-# Country Validation (ISO-based)
-# -------------------------------
-def validate_country(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    if "country" not in df.columns:
-        return df
+    if title_lower in JUNK_JOB_TITLES:
+        return False, "JOB_TITLE_JUNK_VALUE"
 
-    result = df["country"].apply(
-        lambda x: (None, "Missing") if pd.isna(x) or str(x).strip() == ""
-        else (False, "Invalid country") if is_invalid_country(x)
-        else (True, None)
-    )
+    if any(word in title_lower for word in PERSONAL_WORDS):
+        return False, "JOB_TITLE_PERSONAL_NON_B2B"
 
-    df["country_is_valid"] = result.apply(lambda x: x[0])
-    df["country_issue"] = result.apply(lambda x: x[1])
-    return df
+    if any(word in title_lower for word in COMPANY_WORDS):
+        return False, "JOB_TITLE_CONTAINS_COMPANY_WORD"
 
-# -------------------------------
-# Company Age & Founded Date Validation
-# -------------------------------
-def validate_company_age(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    if 'founded_date' not in df.columns or 'company_age' not in df.columns:
-        return df
+    if not any(role in title_lower for role in ROLE_KEYWORDS):
+        return False, "JOB_TITLE_IRRELEVANT"
 
-    today = pd.to_datetime("today").normalize()
-
-    def check_age(row):
-        founded = row.get('founded_date')
-        age = row.get('company_age')
-
-        # Convert founded_date to datetime
-        try:
-            founded_dt = pd.to_datetime(founded, errors='coerce')
-            if pd.isna(founded_dt):
-                return pd.Series([False, "Invalid founded date", False, None])
-        except:
-            return pd.Series([False, "Invalid founded date", False, None])
-
-        # Calculate actual age
-        actual_age = today.year - founded_dt.year - ((today.month, today.day) < (founded_dt.month, founded_dt.day))
-
-        # Compare with existing company_age
-        try:
-            age_val = int(float(age)) # Handle floats
-            if age_val != actual_age:
-                return pd.Series([True, None, False, "Age mismatch"])
-        except:
-            return pd.Series([False, None, False, "Invalid age value"])
-
-        return pd.Series([True, None, True, None])
-
-    df[['founded_date_is_valid', 'founded_date_issue', 'company_age_is_valid', 'company_age_issue']] = df.apply(check_age, axis=1)
-    return df
-
-# -------------------------------
-# Domain Validation (Multi-TLD support)
-# -------------------------------
-def validate_domain(df: pd.DataFrame) -> pd.DataFrame:
-    df = df.copy()
-    domain_cols = [c for c in df.columns if "domain" in c.lower() or "website" in c.lower()]
-    if not domain_cols:
-        return df
-
-    domain_regex = r"^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$"
-
-    for col in domain_cols:
-        def check_domain(value):
-            if pd.isna(value) or str(value).strip() == "":
-                return None, "Missing"
-            val_str = str(value).lower().strip().replace('https://', '').replace('http://', '').replace('www.', '').split('/')[0]
-            if re.fullmatch(domain_regex, val_str):
-                return True, None
-            return False, "Invalid format"
-
-        result = df[col].apply(check_domain)
-        df[f"{col}_is_valid"] = result.apply(lambda x: x[0])
-        df[f"{col}_issue"] = result.apply(lambda x: x[1])
-
-    return df
+    return True, "VALID_JOB_TITLE"

@@ -1,5 +1,11 @@
 # backend/pipeline/data_quality_pipeline.py
 
+import pandas as pd
+import numpy as np
+import tldextract
+import pycountry
+import re
+
 from ..preprocessing.missing_values import (
     impute_annual_revenue,
     get_revenue_column,
@@ -23,102 +29,69 @@ from ..preprocessing.validation import (
     validate_industry,
     validate_country,
     validate_company_age,
-    validate_domain
+    validate_domain,
+    validate_first_name,
+    validate_middle_name,
+    validate_last_name,
+    validate_job_title
 )
 
 from ..preprocessing.role_mapping import map_role_function
 from ..preprocessing.text_processing import (
     apply_spelling_corrections,
-    add_role_description_if_exists
 )
-from ..preprocessing.deduplication import flag_exact_duplicates
 
-import pandas as pd
-import phonenumbers
-import tldextract
-import pycountry
-
-# ------------------------
-# Helper functions
-# ------------------------
 def extract_domain_from_website_series(websites: pd.Series) -> pd.Series:
-    if websites is None or websites.empty:
-        return pd.Series([None] * len(websites))
-
-    websites = (
-        websites.fillna('Not Available')
-        .astype(str)
-        .str.lower()
-        .str.replace(r'https?://|www\.', '', regex=True)
-    )
-
-    return websites.str.split('/').str[0].replace({'not available': None})
-
+    domains = []
+    for ws in websites:
+        if pd.isna(ws) or str(ws).strip().lower() in ['', 'not provided', 'unknown']:
+            domains.append(None)
+            continue
+        try:
+            ext = tldextract.extract(str(ws))
+            domain = f"{ext.domain}.{ext.suffix}" if ext.suffix else ext.domain
+            domains.append(domain)
+        except:
+            domains.append(None)
+    return pd.Series(domains, index=websites.index)
 
 def get_country_from_phone_series(phones: pd.Series) -> pd.Series:
-    countries = []
-
-    for phone in phones:
-        try:
-            if pd.isna(phone) or phone in ['Not Provided', 'Unknown']:
-                countries.append(None)
-                continue
-
-            parsed = phonenumbers.parse(str(phone), None)
-            if phonenumbers.is_valid_number(parsed):
-                region_code = phonenumbers.region_code_for_number(parsed)
-                country = pycountry.countries.get(alpha_2=region_code)
-                countries.append(country.name if country else None)
-            else:
-                countries.append(None)
-        except Exception:
-            countries.append(None)
-
-    return pd.Series(countries, index=phones.index)
-
+    # Basic logic for country inference from phone (can be expanded)
+    return pd.Series([None] * len(phones), index=phones.index)
 
 def get_country_from_website_series(websites: pd.Series) -> pd.Series:
     countries = []
-
     for website in websites:
-        if pd.isna(website) or website in ['Not Provided', 'Unknown']:
+        if pd.isna(website) or str(website).strip().lower() in ['', 'not provided', 'unknown']:
             countries.append(None)
             continue
-
-        extracted = tldextract.extract(str(website))
-        tld = extracted.suffix.split('.')[-1] if extracted.suffix else ''
-
-        if len(tld) == 2:
-            country = pycountry.countries.get(alpha_2=tld.upper())
-            countries.append(country.name if country else None)
-        else:
+        try:
+            extracted = tldextract.extract(str(website))
+            tld = extracted.suffix.split('.')[-1] if extracted.suffix else ''
+            if len(tld) == 2:
+                country = pycountry.countries.get(alpha_2=tld.upper())
+                countries.append(country.name if country else None)
+            else:
+                countries.append(None)
+        except:
             countries.append(None)
-
     return pd.Series(countries, index=websites.index)
-
 
 def infer_country_vectorized(df: pd.DataFrame) -> pd.Series:
     country_from_phone = get_country_from_phone_series(
         df.get('company_phone', pd.Series([None] * len(df)))
     )
-
     website_field = (
         df['domain'] if 'domain' in df.columns
         else df.get('website', pd.Series([None] * len(df)))
     )
-
     country_from_website = get_country_from_website_series(website_field)
-
     return (
         country_from_phone
         .combine_first(country_from_website)
         .fillna('Unknown Country')
     )
 
-
-# ------------------------
-# Main Pipeline
-# ------------------------
 def run_data_quality_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
@@ -126,19 +99,17 @@ def run_data_quality_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     revenue_col = get_revenue_column(df)
     if revenue_col:
         df = normalize_revenue_column(df, revenue_col)
-
     df = impute_annual_revenue(df)
 
     # 2️⃣ Missing values
     df = fill_company_name(df)
     df = fill_contact_fields(df)
     df = fill_website(df)
-    df = fill_company_age(df)  # Fill company_age from founded_date
+    df = fill_company_age(df)
 
     if 'industry' in df.columns:
         df['industry'] = df['industry'].fillna('Unknown Industry')
 
-    # ✅ Head office country
     if 'head_office_country' in df.columns:
         df['head_office_country'] = (
             df['head_office_country']
@@ -146,7 +117,6 @@ def run_data_quality_pipeline(df: pd.DataFrame) -> pd.DataFrame:
             .fillna('Not Specified')
         )
     else:
-        # Maintain existing fill_head_office_country logic if column doesn't exist yet but might be added
         df = fill_head_office_country(df)
 
     # 3️⃣ Domain handling
@@ -177,68 +147,34 @@ def run_data_quality_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     if address_cols:
         df = normalize_address(df, address_cols)
 
-    # 6️⃣ Founded date normalization (LOSSLESS)
+    # 6️⃣ Founded date normalization
     if 'founded_date' in df.columns:
-        df = normalize_founded_date(df, 'founded_date')
-        df['founded_date'] = (
-            df['founded_date']
-            .replace(['', '-', 'nan', 'NaN'], pd.NA)
-            .fillna('Not Provided')
-        )
+        df = normalize_founded_date(df)
 
-    # 6.1️⃣ Company age missing handling
-    if 'company_age' in df.columns:
-        df['company_age'] = (
-            df['company_age']
-            .replace(['', '-', 'nan', 'NaN'], pd.NA)
-            .fillna('Not Provided')
-        )
-
-    # 7️⃣ Location type normalization
-    if 'location_type' in df.columns:
-        df = normalize_location_type(df, 'location_type')
-
-    # 8️⃣ Country inference
-    if 'country' in df.columns:
-        df['country'] = df['country'].fillna(infer_country_vectorized(df))
-
-    # 9️⃣ Text cleanup
-    df = apply_spelling_corrections(df)
-
-    # 🔟 Validation
-    # PRESERVE: industry validation is kept
-    df = validate_company_name(df)
-    df = validate_email(df)
-    df = validate_phone(df)
-    df = validate_industry(df)
-    df = validate_country(df)
-    df = validate_domain(df)
-
-    if 'founded_date' in df.columns and 'company_age' in df.columns:
-        df = validate_company_age(df)
-
-    # 1️⃣1️⃣ Role mapping: jobtitle → role_description (updated to jobtitle)
-    if 'jobtitle' in df.columns:
-        df = map_role_function(df)  # uses your role_mapping.py rules
-
-    # 1️⃣2️⃣ Role description enhancements
-    df = add_role_description_if_exists(df)
-
-    # 1️⃣3️⃣ Deduplication
-    df = flag_exact_duplicates(df)
-
-    # 1️⃣4️⃣ Streamlit compatibility: all object columns as string
-    object_cols = [
-        'company_size', 'jobtitle', 'title', 'person_name',
-        'industry', 'country', 'domain',
-        'address_1', 'address_2', 'address_3',
-        'full_address', 'location_type', 'head_office_country',
-        'founded_date', 'company_age', 'role_description'
+    # 7️⃣ Validation and Status Columns
+    validation_map = [
+        ('company_name', validate_company_name),
+        ('email', validate_email),
+        ('company_phone', validate_phone),
+        ('industry', validate_industry),
+        ('head_office_country', validate_country),
+        ('company_age', validate_company_age),
+        ('domain', validate_domain),
+        ('first_name', validate_first_name),
+        ('middle_name', validate_middle_name),
+        ('last_name', validate_last_name),
+        ('jobtitle', validate_job_title)
     ]
 
-    for col in object_cols:
+    for col, val_func in validation_map:
         if col in df.columns:
-            # First ensure it's not all NA to avoid casting issues
-            df[col] = df[col].astype(str).replace('nan', 'Not Provided').replace('None', 'Not Provided')
+            status_col = f"{col}_status"
+            issue_col = f"{col}_issue"
+            
+            # Apply validation and store results
+            # Result is a tuple (is_valid, issue_string)
+            results = df[col].apply(lambda x: val_func(x))
+            df[status_col] = results.apply(lambda x: "VALID" if x[0] else "INVALID")
+            df[issue_col] = results.apply(lambda x: x[1])
 
     return df

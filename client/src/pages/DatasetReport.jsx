@@ -189,7 +189,8 @@ export default function DatasetReport() {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `cleaned-${dataset.filename}`;
+            const baseName = dataset.filename.split('.').slice(0, -1).join('.');
+            a.download = `cleaned-${baseName}.csv`;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
