@@ -39,6 +39,7 @@ The Quality Guardian server is a Node.js / Express application that handles user
 1. User sends a file (multipart/form-data).
 2. Multer saves it to `/uploads`.
 3. Server creates a `status: 'processing'` entry in MongoDB.
-4. Server POSTs the file path to `http://localhost:5000/process`.
-5. Upon SUCCESS: Entry is updated with the report JSON and `status: 'completed'`.
+4. Server POSTs the file path to `http://localhost:5000/process` (Flask ML Service).
+5. *Note: Conversational audits can be performed via the Sentinel AI (Streamlit) app in the `ml/` directory.*
+6. Upon SUCCESS: Entry is updated with the report JSON and `status: 'completed'`.
 6. Upon FAILURE: Entry is updated with `status: 'failed'` and an error message.

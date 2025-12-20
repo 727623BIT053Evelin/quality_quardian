@@ -8,6 +8,7 @@ Quality Guardian's frontend is a high-performance React application designed for
 - **Responsive Navigation**: Sidebar-driven layout for switching between Reports, Datasets, and Settings.
 - **Global Search**: Instantly filter datasets and reports across the entire workspace.
 - **Animated Transitions**: Smooth UI state changes using `Framer Motion`.
+- **Sentinel AI Integration**: Use the companion Streamlit assistant for conversational data auditing.
 
 ## 🛠️ Tech Stack
 - **Framework**: React (Vite)

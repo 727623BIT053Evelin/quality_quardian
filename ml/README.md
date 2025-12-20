@@ -34,7 +34,7 @@ Advanced rule-based validation for high-value B2B fields:
 - **Status Metadata**: Every validated field generates a companion `<col>_status` (VALID/INVALID) and `<col>_issue` (reason code).
 
 ### 3. Sentinel AI Assistant (`streamlit_chatbot.py`) ✨
-A conversational data consultant that allows users to "talk" to their dataset.
+A conversational data consultant that allows users to "talk" to their dataset. Run using: `streamlit run streamlit_chatbot.py`
 - **Audit Reports**: Instantly answers questions about missing values, duplicates, and health scores.
 - **Feature Analysis**: Describes column structures and record counts.
 - **Remediation**: Suggests specific pipeline steps to fix detected errors.
